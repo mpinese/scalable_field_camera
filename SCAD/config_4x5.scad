@@ -53,8 +53,8 @@ vBellowsBackLightTrapOuter_l = vBellowsBackFrameInner_l+2*2;
 vBellowsBackLightTrapOuter_w = vBellowsBackLightTrapOuter_l;
 vBellowsBackLightTrap_h = 3;
 
-vBellowsBackFrameScrewHole_d = 2;
-vBellowsBackFrameScrewHole_h = 10;
+//vBellowsBackFrameScrewHole_d = 2;
+//vBellowsBackFrameScrewHole_h = 10;
 vBellowsBackFrameScrewHole_offsetXY = 70;
 vBellowsBackFrameScrewHole_offsetZ = vBellowsBackFrameOuter_h/2;
 
@@ -75,8 +75,8 @@ vBellowsFrontLightTrapOuter_l = vBellowsFrontFrameInner_l+2*2;
 vBellowsFrontLightTrapOuter_w = vBellowsFrontLightTrapOuter_l;
 vBellowsFrontLightTrap_h = 0;
 
-vBellowsFrontFrameScrewHole_d = 2;
-vBellowsFrontFrameScrewHole_h = 10;
+//vBellowsFrontFrameScrewHole_d = 2;
+//vBellowsFrontFrameScrewHole_h = 10;
 vBellowsFrontFrameScrewHole_offsetXY = 40;
 vBellowsFrontFrameScrewHole_offsetZ = vBellowsFrontFrameOuter_h/2;
 
@@ -200,3 +200,9 @@ vInsertMinDepth_h = 5.0;
 // (may be labelled M2x3.5x4)
 vInsertHoleSmall_d = 3.1;
 vInsertMinDepthSmall_h = 4.0;
+
+// Dimensions for large heat set insert holes.
+// Sized for M5 inserts, 5 mm depth, 7 mm max OD
+// (may be labelled M5x7x5)
+vInsertHoleLarge_d = 6.6;
+vInsertMinDepthLarge_h = 5.5;

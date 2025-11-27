@@ -66,8 +66,8 @@ vBackPlateCutout_offsetX = -vBackPlateCutout_l/2;
 vBackPlateCutout_offsetY = -vBackPlateCutout_w/2;
 vBackPlateCutout_offsetZ = 0;
 
-vBackPlateScrewHole_d = vScrew1ThreadHole_d;
-vBackPlateScrewHole_h = 10;
+vBackPlateScrewHole_d = vInsertHoleSmall_d;
+vBackPlateScrewHole_h = vInsertMinDepthSmall_h+0.5;
 vBackPlateLockScrewHole_offsetX = vTopEdgeBolt_offsetX;
 vBackPlateLockScrewHole_offsetY = vEdgeBolt_offsetY;
 vBackPlateRailScrewHole_offsetX = -(vBackPlateLength/2)-5;

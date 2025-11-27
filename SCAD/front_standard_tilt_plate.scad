@@ -43,17 +43,11 @@ vTiltAxis_offsetX = vTiltHeight;
 vTiltAxis_offsetY = 0;
 vTiltAxis_offsetZ = vTiltPlate_h;
 
-// we are using M5 nuts to press into a hole with d=7, h=6
-vNutHole_d = 7;
-vNutHole_h = vTiltPlate_h+vTiltDovetailBaseBlock_h+2; 
-vNutHole_offsetX = vTiltHeight;
-vNutHole_offsetY = 0;
-vNutHole_offsetZ = vRail_h+vTiltPlate_h-vNutHole_h;
-
+// Hole for the M5 bolt
 vScrewHole_d = 5+vTolerance;
 vScrewHole_h = vRail_h+vTiltPlate_h+vTiltDovetailBaseBlock_h;
-vScrewHole_offsetX = vNutHole_offsetX;
-vScrewHole_offsetY = vNutHole_offsetY;
+vScrewHole_offsetX = vTiltHeight;
+vScrewHole_offsetY = 0;
 vScrewHole_offsetZ = vRail_offsetZ;
 
 vTiltSlotPlate_d = 10;
@@ -117,14 +111,15 @@ difference(){
     };
     
    
+    // TODO: Heat set insert hole here. For M5 bolt.
     
-    // screw hole
+    // Bolt thread hole
     translate([vScrewHole_offsetX, vScrewHole_offsetY, vScrewHole_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);
     
-    // screw hole
-    translate([vNutHole_offsetX, vNutHole_offsetY, vNutHole_offsetZ])
-        cylinder(d=vNutHole_d, h=vNutHole_h);
+    // Heat insert hole
+    translate([vScrewHole_offsetX, vScrewHole_offsetY, vScrewHole_offsetZ])
+        cylinder(d=vInsertHoleLarge_d, h=vInsertMinDepthLarge_h);
     
     // cutting the lower edges
     translate([vEdgeCut_offsetX, -vEdgeCut_offsetY, vEdgeCut_offsetZ])

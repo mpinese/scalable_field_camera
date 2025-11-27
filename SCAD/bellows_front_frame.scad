@@ -60,6 +60,9 @@ vBellowsScrew_offsetZ = vLowerCube_h/2;
 vBellowsFrontFrameScrewHole_offsetX = (vLowerCube_l)/2;
 vBellowsFrontFrameScrewHole_offsetY = vBellowsFrontFrameScrewHole_offsetXY;
 
+vBellowsFrontFrameScrewHole_d=vInsertHole_d;
+vBellowsFrontFrameScrewHole_h=vInsertMinDepth_h;
+
 difference(){
     union(){
         // lower cube

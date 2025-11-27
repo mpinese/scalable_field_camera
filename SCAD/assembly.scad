@@ -66,11 +66,30 @@ if (mode == "display")
     color("lightyellow") translate([-152, -80, 10]) rotate([270, 0, 90]) scale([1, -1, 1]) locking_rail();
     
     /* Additional parts:
+    Screw, M3, 10mm, countersunk: 8
+    M3x4x5 insert: 28
+    Screw, M3, ??mm, ball head: 16 (bellows front frame & back frame)
+    Screw, M2, 10mm, countersunk: 6
+    M2x3.5x4 insert: 14
+    M5x7x5 insert: 2
     
-    Screw, M3, 10mm, countersunk: 6
-    
+- bellows, for 4x5" order the bellows from standardcameras, for 5x7 or 8x10 order from eBay
+- focusing rod: T6, 2 or 4mm lead, 150mm length
+- T6 nut (brass) 
+- flange coupler 6mm
+- M5 threaded rod, 180mm
+- M5x20 screw (1x)
+- M5 knurled nuts (3x)
+- M5x10 screws with knurled heads (2x)
+- M5x12 screws with knurled heads (2x)
+- M5 press-in nuts (4x)
+- countersunk screws 3x12 (30x)
+- countersunk screws 2x10 (6x)
+- ground glass 127x101mm
+- about 600mm of 1.25mm spring steel wire for the ground glass frame
+- about 100mm of 0.75mm spring steel wire for the pulling lever mechanism    
     */
-    //color("black") translate([-70, 30, -7]) screw(l=10);
+    color("black") translate([87, -60, ]) screw(l=10);
 }
 else if (mode == "print")
 {
