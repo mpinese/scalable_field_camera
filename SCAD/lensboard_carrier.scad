@@ -62,8 +62,8 @@ vBellowsScrewHole_offsetX = -vFrontPlate_length/2;
 vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2;
 vBellowsScrewHole_offsetZ = vBellowsCutoutLower_height/2;
 
-vClampHole_d = 2;
-vClampHole_h = 8;
+vClampHole_d = vInsertHole_d;
+vClampHole_h = vInsertMinDepth_h+0.5;
 vClampHole_offsetX1 = vLensBoardCutout_offsetX-4;
 vClampHole_offsetX2 = vLensBoardCutout_offsetX+vLensboard_l+4;
 vClampHole_offsetY = 25;
@@ -161,6 +161,7 @@ translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrew
         cylinder(d=vBellowsScrewHole_d, h=vBellowsScrewHole_h);
 
 // sinkings for the bellows screws
+// TODO: add countersink?
 // vertical
 translate([vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetZ])
     rotate([0, 90, 0])

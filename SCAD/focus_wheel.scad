@@ -113,7 +113,6 @@ difference(){
         cylinder(d=vThreadNut_d, h=vThreadNut_h);
     
    
-    
     // locking screw hole
     translate([vLockingScrewHole_offsetX, 0, vLockingScrewHole_offsetZ])
         rotate([0,90, 0])

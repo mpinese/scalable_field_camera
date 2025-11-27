@@ -194,3 +194,9 @@ vScrew2ThreadHole_d = 1.4;
 // (variously labelled M3x4x5 or M3x5x4)
 vInsertHole_d = 4.0;
 vInsertMinDepth_h = 5.0;
+
+// Dimensions for small heat set insert holes.
+// Sized for M2 inserts, 4 mm depth, 3.5 mm max OD
+// (may be labelled M2x3.5x4)
+vInsertHoleSmall_d = 3.1;
+vInsertMinDepthSmall_h = 4.0;

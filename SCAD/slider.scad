@@ -46,14 +46,14 @@ vLeverBoltHole_offsetX = -(2*vDoveTail_w);
 vLeverBoltHole_offsetY = (vUpperRail_w-(8*vDoveTail_w)) / 2;
 vLeverBoltHole_offsetZ = vFrontStandartBasePlate_h1-1;
 
-vLeverBoltScrewHole_d = 1.2;
+vLeverBoltScrewHole_d = vInsertHoleSmall_d;
 vLeverBoltScrewHole_h = vFrontStandartBasePlate_h;
 vLeverBoltScrewHole_offsetX = vLeverBoltHole_offsetX;
 vLeverBoltScrewHole_offsetY = vLeverBoltHole_offsetY;
 vLeverBoltScrewHole_offsetZ = 0;
 
 // lever plate screw holes
-vLeverPlateScrewHole_d = 1.2;
+vLeverPlateScrewHole_d = vInsertHoleSmall_d;
 vLeverPlateScrewHole_h = vFrontStandartBasePlate_h;
 vLeverPlateScrewHole_offsetX1 = -(3*vDoveTail_w);
 vLeverPlateScrewHole_offsetX2 = vDoveTail_w;
