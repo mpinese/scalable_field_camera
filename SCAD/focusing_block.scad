@@ -114,11 +114,11 @@ vScrewHole3_offsetZ = 0;
             wedge(vRightUpperEdgeCutout_l, vRightUpperEdgeCutout_w, -vRightUpperEdgeCutout_h);
      // screw holes
      translate([vScrewHole1_offsetX, vScrewHole1_offsetY, vScrewHole1_offsetZ])
-        cylinder(d=vScrewHole_d, h=vScrewHole_h);
+        cylinder(d=vInsertHole_d, h=vInsertMinDepth_h+.5);
     /*translate([vScrewHole2_offsetX, vScrewHole2_offsetY, vScrewHole2_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);*/
     translate([vScrewHole3_offsetX, vScrewHole3_offsetY, vScrewHole3_offsetZ])
-        cylinder(d=vScrewHole_d, h=vScrewHole_h);
+        cylinder(d=vInsertHole_d, h=vInsertMinDepth_h+.5);
  }
  
  };
