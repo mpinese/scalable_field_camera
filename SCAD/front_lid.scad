@@ -116,14 +116,15 @@ vFocusingBlockCutout_offsetX = -vFrontLidInner_offsetX;
 vFocusingBlockCutout_offsetY = vFrontLidInner_offsetY+vFrontLid_wall;
 vFocusingBlockCutout_offsetZ = vFrontLid_wall;
 
-// Screwholes for the stabilizing lid
-vLidHole_d = vScrew1ThreadHole_d;
-vLidHole_h = vFrontLid_wall;
+// Insert holes for the stabilizing lid
+vLidHole_d = vInsertHole_d;
+vLidHole_h = vInsertMinDepth_h+0.5;
+assert(vFrontLid_wall >= vInsertMinDepth_h);
 
 vLidHoleRow_length = (vLidHoleCount_x-1)*vLidHoleDist_x;
 vLidHoleRow_offsetX = -vLidHoleRow_length/2-17.5;
 vLidHoleRow_offsetY = vLidHoleDist_y/2;
-vLidHoleRow_offsetZ = 0.5; // because of problems with adhesion for the first layer, we place our little screw holes a little bit higher and do the rest with post processing (hot needle)
+vLidHoleRow_offsetZ = 0; // No offset to enable easy insert installation
 
 
 
@@ -222,17 +223,20 @@ difference(){
     translate([vLensIndent_offsetX, vLensIndent_offsetY, vLensIndent_offsetZ])
         cylinder(d1=vLensIndent_d1, d2=vLensIndent_d2, h=vLensIndent_h);
     
-    // Holes for screwing the stabilizer lid   
+    // Insert holes for screwing the stabilizer lid
+    // Suppress holes for i = 2 as these impinge on the lens indent
     translate([vLidHoleRow_offsetX, vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
     for (i = [0:vLidHoleCount_x-1]){ 
+        if (i != 2) {
         translate([i*vLidHoleDist_x, 0, 0])
-        cylinder(d=vLidHole_d, h=vLidHole_h);
+        cylinder(d=vLidHole_d, h=vLidHole_h); }
     };
     
     translate([vLidHoleRow_offsetX, -vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
     for (i = [0:vLidHoleCount_x-1]){ 
+        if (i != 2) {
         translate([i*vLidHoleDist_x, 0, 0])
-        cylinder(d=vLidHole_d, h=vLidHole_h);
+        cylinder(d=vLidHole_d, h=vLidHole_h); }
     };
     
     // cones for edge bolts from body

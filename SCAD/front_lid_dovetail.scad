@@ -50,18 +50,21 @@ difference(){
         roof(vDovetail_length, vDovetailOuter_width, vDovetailOuter_width/2);
     
     // Holes for screwing the stabilizer lid
+    // Suppress holes for i = 2 as these impinge on the lens indent (see front_lid.scad)
     translate([vLidHoleRow_offsetX, vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
         mirror([0,0,1])
         for (i = [0:vLidHoleCount_x-1]){ 
+            if (i != 2) {
             translate([7.5+i*vLidHoleDist_x, 0, 0])
-            countersunk_screw(vLidHole_d, vLidHole_h);
+            countersunk_screw(vLidHole_d, vLidHole_h); }
         };
     
     translate([vLidHoleRow_offsetX, -vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
         mirror([0,0,1])
         for (i = [0:vLidHoleCount_x-1]){ 
+            if (i != 2) {
             translate([7.5+i*vLidHoleDist_x, 0, 0])
-            countersunk_screw(vLidHole_d, vLidHole_h);
+            countersunk_screw(vLidHole_d, vLidHole_h); }
         };
     
     // Hole for Locking Screw
