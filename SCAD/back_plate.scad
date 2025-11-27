@@ -4,7 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
-
+module back_plate() {
 
 vCassetteLighttrapBorder = 1.5;
 
@@ -194,3 +194,6 @@ difference(){
     
 };    
  
+};
+
+back_plate();

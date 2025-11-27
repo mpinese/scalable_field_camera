@@ -5,7 +5,7 @@ include <baseconfig.scad>;
 use <modules.scad>;
 
 
-
+module pulling_lever_plate() {
 
 vBoltPlate_length = 20-(2*vTolerance);
 vBoltPlate_width = vLeverPlateBase_w; // caution: this is just the width without the radius!
@@ -136,3 +136,7 @@ difference(){
 
     
 };
+
+};
+
+pulling_lever_plate();

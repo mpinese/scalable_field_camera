@@ -5,6 +5,9 @@ include <baseconfig.scad>;
 use <modules.scad>;
 
 
+module tripod_plate()
+{
+
 vTotalPlate_length = vStabilizerBase_l;
 vTotalPlate_height = 12;
 
@@ -49,7 +52,6 @@ vLockingHole_h = vTotalPlate_height;
 vLockingHole_offsetX = vLockingCylinder_offsetX;
 vLockingHole_offsetY = vLockingCylinder_offsetY;
 vLockingHole_offsetZ = vLockingCylinder_offsetZ;
-
 
 difference(){
     union(){
@@ -123,3 +125,7 @@ difference(){
             cylinder(d=vLockingHole_d, h=vLockingHole_h);
     
 };
+
+};
+
+tripod_plate();

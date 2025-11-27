@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module front_lid_dovetail() {
 
 vStabilizer_offsetX = -vStabilizerBase_l/2;
 vStabilizer_offsetY = -vStabilizerBase_w/2;
@@ -23,7 +24,7 @@ vDovetailOuter_width = vStabilizerDovetailBase_w+vDoveTail_tolerance;
 vDovetailInner_width = vDovetailOuter_width-(2*vDoveTail_w);
 vDovetail_offsetX = vStabilizer_offsetX;
 vDovetail_offsetY = -vDovetailOuter_width/2;
-vDovetail_offsetZ = vStabilizerBase_h;
+vDovetail_offsetZ = vStabilizerBase_h-5;
 
 vLockingHole_d = 5;
 vLockingHole_h = vStabilizerTotal_h;
@@ -52,14 +53,14 @@ difference(){
     translate([vLidHoleRow_offsetX, vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
         mirror([0,0,1])
         for (i = [0:vLidHoleCount_x-1]){ 
-            translate([i*vLidHoleDist_x, 0, 0])
+            translate([7.5+i*vLidHoleDist_x, 0, 0])
             countersunk_screw(vLidHole_d, vLidHole_h);
         };
     
     translate([vLidHoleRow_offsetX, -vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
         mirror([0,0,1])
         for (i = [0:vLidHoleCount_x-1]){ 
-            translate([i*vLidHoleDist_x, 0, 0])
+            translate([7.5+i*vLidHoleDist_x, 0, 0])
             countersunk_screw(vLidHole_d, vLidHole_h);
         };
     
@@ -87,3 +88,7 @@ difference(){
     };
     
 */
+
+};
+
+front_lid_dovetail();

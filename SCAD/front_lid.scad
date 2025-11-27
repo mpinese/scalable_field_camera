@@ -5,6 +5,7 @@ include <baseconfig.scad>;
 use <modules.scad>;
 
 
+module front_lid() {
 
 // our outer frame measurements - caution overall
 vFrontLidOuter_l = vBodyOuter_l;
@@ -120,7 +121,7 @@ vLidHole_d = vScrew1ThreadHole_d;
 vLidHole_h = vFrontLid_wall;
 
 vLidHoleRow_length = (vLidHoleCount_x-1)*vLidHoleDist_x;
-vLidHoleRow_offsetX = -vLidHoleRow_length/2;
+vLidHoleRow_offsetX = -vLidHoleRow_length/2-17.5;
 vLidHoleRow_offsetY = vLidHoleDist_y/2;
 vLidHoleRow_offsetZ = 0.5; // because of problems with adhesion for the first layer, we place our little screw holes a little bit higher and do the rest with post processing (hot needle)
 
@@ -243,3 +244,6 @@ difference(){
 };
 
 
+};
+
+front_lid();

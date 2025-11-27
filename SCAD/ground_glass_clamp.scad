@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module ground_glass_clamp() {
 
 vGGClampPlate_l = 10;
 vGGClampPlate_w = 40-(2*vTolerance);
@@ -58,3 +59,7 @@ difference(){
         cylinder(d=vScrewHole_d, h=vScrewHole_h );
 
 };
+
+};
+
+ground_glass_clamp();

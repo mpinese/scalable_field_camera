@@ -4,6 +4,8 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module slider() {
+
 // we have some large rounded objects, so we smooth them a bit more with a higher number of fragments
 $fn = 120; 
 
@@ -70,7 +72,6 @@ vLeverCutoutHoles_h = vLeverCutout_h;
 vLeverCutoutHoles_offsetX = vLeverCutout_offsetX+(vLeverCutoutHoles_d/2);
 vLeverCutoutHoles_offsetY = vLeverCutout_offsetY;
 vLeverCutoutHoles_offsetZ = 0;
-
 
 
 difference(){
@@ -159,3 +160,7 @@ union(){
         cylinder(d=vLeverCutoutHoles_d, h=vLeverCutoutHoles_d );
     
 };
+
+};
+
+slider();

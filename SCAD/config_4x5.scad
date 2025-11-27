@@ -2,6 +2,7 @@
 This is the base configuration file for the 4x5" format
 # we are not using the exact ANSI measures, but slightly rounded measures for slight simplification
 */
+vStabilizerTotal_h = 7;
 
 // general tolerance
 vTolerance = 0.2;
@@ -170,12 +171,12 @@ vFocusingKnob_d = 25;
 vFocusingKnob_h = 20;
 
 // stabilizer measures (just the outer measures of our stabilizer block, not the tripod slider)
-vStabilizerBase_l = 140;
-vStabilizerBase_w = 100;  
+vStabilizerBase_l = 135;
+vStabilizerBase_w = 90;  
 vStabilizerBase_h = 7;
 vStabilizerDovetailBase_w = 50;
 // screw holes for the stabilizer
-vLidHoleCount_x = 5;
+vLidHoleCount_x = 4;
 vLidHoleDist_x = 35;
 vLidHoleCount_y = 2;
 vLidHoleDist_y = 60;

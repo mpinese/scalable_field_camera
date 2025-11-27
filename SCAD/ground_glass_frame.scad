@@ -4,6 +4,8 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module ground_glass_frame() {
+
 // variables
 
 // this are raw measurements - we will derive the final measurements for our model from them
@@ -177,3 +179,6 @@ union(){
     
 };    
      
+};
+
+ground_glass_frame();

@@ -4,6 +4,8 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module front_standard_tilt_plate() {
+
 // vTiltHeight = 45; // defined in config file
 
 vTiltPlate_l = vTiltHeight + vTiltRadius;
@@ -141,3 +143,6 @@ difference(){
     
 };
 
+};
+
+front_standard_tilt_plate();

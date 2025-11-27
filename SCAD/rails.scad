@@ -6,6 +6,7 @@ use <modules.scad>;
     
 // some measures in here are hard wired based on the experience with the first prototype. Normally there is no need to change them (except a measure is hinted with "adapt")
 
+module rails() {
 
 vRailTolerance = vTolerance;
     
@@ -96,7 +97,6 @@ vLidLock_offsetZ = 5+vLidLockBase_d;
 
 vEdgeCutoff = 3;
 vEdgeCutoff_h = vLowerRail_h+vMidSection_h+vUpperRail_h;
-
 
 difference(){
 union(){
@@ -199,3 +199,7 @@ union(){
             wedge(vEdgeCutoff_h, vEdgeCutoff, vEdgeCutoff);
     
 };
+
+};
+
+rails();

@@ -4,7 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
-
+module bellows_back_frame() {
 
 // we are centering our cube
 vLowerCube_l = vBellowsBackFrameOuter_l;
@@ -151,3 +151,7 @@ difference(){
             cylinder(d=vBellowsBackFrameScrewHole_d, h=vBellowsBackFrameScrewHole_h);        
 
 }
+
+};
+
+bellows_back_frame();

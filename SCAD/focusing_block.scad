@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module focusing_block() {
 
 // focusing rod axis is set to -63mm to the lid center
 // rail block total width is 100mm
@@ -119,3 +120,7 @@ vScrewHole3_offsetZ = 0;
     translate([vScrewHole3_offsetX, vScrewHole3_offsetY, vScrewHole3_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);
  }
+ 
+ };
+ 
+ focusing_block();

@@ -1,3 +1,4 @@
+module focus_wheel() {
 
 $fn=60;
 
@@ -134,3 +135,7 @@ difference(){
     
 
 };
+
+};
+
+focus_wheel();

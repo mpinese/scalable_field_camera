@@ -4,6 +4,7 @@ $fn = 60; // we are using 60 fragments for cylinders and similar objects
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module locking_lever() {
 
 // variables
 
@@ -56,3 +57,7 @@ translate([vLockingLeverRadius_offsetX, vLockingLeverRadius_offsetY, vLockingLev
     translate([vLockingLeverRampCutoff_offsetX, vLockingLeverRampCutoff_offsetY, vLockingLeverRampCutoff_offsetZ])
         wedge(vLockingLeverRampCutoff_w, vLockingLeverRampCutoff_l, vLockingLeverRampCutoff_h);
 };
+
+};
+
+locking_lever();

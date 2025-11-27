@@ -5,6 +5,8 @@ $fn = 60; // we are using 60 fragments for cylinders and similar objects
 use <modules.scad>;
 
 
+module lensboard_upper_clamp() {
+
 // variables
 
 vClampBase_l = 15;
@@ -104,3 +106,7 @@ difference(){
             wedge(vEdgeCut_h, vEdgeCut, vEdgeCut);        
     
 }
+
+};
+
+lensboard_upper_clamp();

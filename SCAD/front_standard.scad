@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module front_standard() {
 
 // base plate
 vFrontStandartBasePlate_d1 = vSliderBase_w; // maybe add tolerance here?
@@ -126,3 +127,7 @@ difference(){
 
 
 };
+
+};
+
+front_standard();

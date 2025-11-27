@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module lensboard_carrier() {
 
 // some variables
 // $fn = 120; // we are using 120 fragments for cylinders and similar objects
@@ -226,3 +227,7 @@ translate([vSwingScrewCutout_offsetX, vSwingScrewCutout_offsetY, vSwingScrewCuto
 
 
 // cylinder(d1=105, d2=85, h=4, $fn=4);
+
+};
+
+lensboard_carrier();

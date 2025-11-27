@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module body() {
 
 vBellowsFrameUpperLength = vBellowsBackFrameOuter_l+1;
 //vBellowsFrameLowerLength = vBellowsBackFrameInner_l+1;
@@ -305,4 +306,6 @@ difference(){
     
     };
         
-        
+ };
+ 
+ body();
