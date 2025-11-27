@@ -120,16 +120,12 @@ difference(){
             cylinder(d=vLockingScrewHole_d, h=vLockingScrewHole_h);
     
     
-    for (i=[0:5]){
+    for (i=[0:11]){
     rotate([0, 0, i*30])    
         union(){
         translate([vCutout_offsetX, vCutout_offsetY, vCutout_offsetZ])
             rotate([0, 270, 0])
                 roof(vCutout_l, vCutout_w, vCutout_h);
-
-        translate([-vCutout_offsetX, vCutout_offsetY, vCutout_offsetZ])
-            rotate([0, 270, 0])
-                roof(vCutout_l, vCutout_w, -vCutout_h);
         };
     };
     
