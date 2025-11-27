@@ -77,3 +77,19 @@ module hex(kw, h) {
                 }
 }
 
+$fn=50;
+// Countersunk screw, metric, for display
+module screw(l, d=3, k=2.5, s=2, t=1) {
+    // l: total length (including head) in mm
+    // d: thread diameter (eg 3 for M3)
+    // k: head depth
+    // s: hex socket flat-to-flat size
+    // t: hex socket depth
+    difference() {
+        union() {
+            cylinder(h=l, r=d/2);
+            cylinder(h=k, r1=d/2+k, r2=d/2);
+            }
+        cylinder(h=t, r=s/2*2/sqrt(3), $fn=6);
+    }
+}

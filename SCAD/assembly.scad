@@ -22,6 +22,7 @@ use <pulling_lever_plate.scad>;
 use <rails.scad>;
 use <slider.scad>;
 use <tripod_plate.scad>;
+use <modules.scad>;
 
 mode = "display";
 //mode = "print";
@@ -63,6 +64,13 @@ if (mode == "display")
     color("black") translate([-152, 85, 190]) rotate([180, 90, 0]) locking_lever();
     color("white") translate([-152, 80, 10]) rotate([90, 0, 270]) locking_rail();
     color("lightyellow") translate([-152, -80, 10]) rotate([270, 0, 90]) scale([1, -1, 1]) locking_rail();
+    
+    /* Additional parts:
+    
+    Screw, M3, 10mm, countersunk: 6
+    
+    */
+    //color("black") translate([-70, 30, -7]) screw(l=10);
 }
 else if (mode == "print")
 {
