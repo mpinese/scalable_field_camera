@@ -189,20 +189,26 @@ vScrew2Hole_d = 2;
 vScrew2ThreadHole_d = 1.4;
 
 
-// Dimensions for heat set insert holes.
-// Sized for "Voron standard" M3 inserts, 4 mm depth, 5 mm max OD
-// (variously labelled M3x4x5 or M3x5x4)
-vInsertHole_d = 4.0;
-vInsertMinDepth_h = 5.0;
-
 // Dimensions for small heat set insert holes.
 // Sized for M2 inserts, 4 mm depth, 3.5 mm max OD
 // (may be labelled M2x3.5x4)
-vInsertHoleSmall_d = 3.1;
-vInsertMinDepthSmall_h = 4.0;
+vInsertM2Hole_d = 3.2;
+vInsertM2MinDepth_h = 5.0;
+vInsertM2Size_d = 3.5;
+vInsertM2Depth_h = 4.0;
+
+// Dimensions for heat set insert holes.
+// Sized for "Voron standard" M3 inserts, 4 mm depth, 5 mm max OD
+// (variously labelled M3x4x5 or M3x5x4)
+vInsertM3Hole_d = 4.7;
+vInsertM3MinDepth_h = 5.0;
+vInsertM3Size_d = 5.0;
+vInsertM3Depth_h = 4.0;
 
 // Dimensions for large heat set insert holes.
 // Sized for M5 inserts, 5 mm depth, 7 mm max OD
 // (may be labelled M5x7x5)
-vInsertHoleLarge_d = 6.6;
-vInsertMinDepthLarge_h = 5.5;
+vInsertM5Hole_d = 6.7;
+vInsertM5MinDepth_h = 6.0;
+vInsertM5Size_d = 7.0;
+vInsertM5Depth_h = 5.0;

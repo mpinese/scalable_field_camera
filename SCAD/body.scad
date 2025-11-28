@@ -66,8 +66,8 @@ vBackPlateCutout_offsetX = -vBackPlateCutout_l/2;
 vBackPlateCutout_offsetY = -vBackPlateCutout_w/2;
 vBackPlateCutout_offsetZ = 0;
 
-vBackPlateScrewHole_d = vInsertHoleSmall_d;
-vBackPlateScrewHole_h = vInsertMinDepthSmall_h+0.5;
+vBackPlateScrewHole_d = vInsertM2Hole_d;
+vBackPlateScrewHole_h = vInsertM2MinDepth_h;
 vBackPlateLockScrewHole_offsetX = vTopEdgeBolt_offsetX;
 vBackPlateLockScrewHole_offsetY = vEdgeBolt_offsetY;
 vBackPlateRailScrewHole_offsetX = -(vBackPlateLength/2)-5;
@@ -132,8 +132,8 @@ vStabilizerDovetailToleranceCutout_offsetX = vStabilizerDovetail_offsetX;
 vStabilizerDovetailToleranceCutout_offsetY = vStabilizerDovetail_offsetY;
 vStabilizerDovetailToleranceCutout_offsetZ = vStabilizerDovetail_offsetZ;
 
-vLockingHole_d = 5+vTolerance;
-vLockingHole_h = 8;
+vLockingHole_d = vInsertM5Hole_d;
+vLockingHole_h = vInsertM5MinDepth_h;
 vLockingHole_offsetX = vStabilizerDovetail_offsetX;
 vLockingHole_offsetY = 0;
 vLockingHole_offsetZ = 10;
