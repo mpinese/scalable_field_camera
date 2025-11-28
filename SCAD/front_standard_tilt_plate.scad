@@ -119,7 +119,7 @@ difference(){
     
     // Heat insert hole
     translate([vScrewHole_offsetX, vScrewHole_offsetY, vScrewHole_offsetZ])
-        cylinder(d=vInsertHoleLarge_d, h=vInsertMinDepthLarge_h);
+        cylinder(d=vInsertM5Hole_d, h=vInsertM5MinDepth_h);
     
     // cutting the lower edges
     translate([vEdgeCut_offsetX, -vEdgeCut_offsetY, vEdgeCut_offsetZ])

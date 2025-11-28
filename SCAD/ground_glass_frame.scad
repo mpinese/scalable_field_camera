@@ -30,7 +30,7 @@ vGGHolder_offsetX = 0;
 vGGHolder_offsetY = -vGGHolder_h/2;
 vGGHolder_offsetZ = vGGHolder_d/2;
 
-vGGHolderHole_d = vInsertHoleSmall_d;
+vGGHolderHole_d = vInsertM2Hole_d;
 vGGHolderHole_h = vGGHolder_h;
 vGGHolderHole_offsetX = 0;
 vGGHolderHole_offsetY = -vGGHolder_h/2;
@@ -64,8 +64,8 @@ vGGClampCutout_offsetX2 = (vGGFrameCutout_l/2);
 vGGClampCutout_offsetY = -(vGGClampCutout_w/2);
 vGGClampCutout_offsetZ = vGG_plane_offset+vGG_thickness;
 
-vGGClampHole_d = vInsertHole_d;
-vGGClampHole_h = vInsertMinDepth_h+0.5;
+vGGClampHole_d = vInsertM3Hole_d;
+vGGClampHole_h = vInsertM3MinDepth_h;
 assert(vGGFrame_h >= vGGClampHole_h);
 vGGClampHole_offsetX1 = -(vGGFrameCutout_l/2) - (vGGClampCutout_l/2);
 vGGClampHole_offsetX2 = (vGGFrameCutout_l/2) + (vGGClampCutout_l/2);

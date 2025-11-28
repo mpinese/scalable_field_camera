@@ -62,8 +62,8 @@ vBellowsScrewHole_offsetX = -vFrontPlate_length/2;
 vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2;
 vBellowsScrewHole_offsetZ = vBellowsCutoutLower_height/2;
 
-vClampHole_d = vInsertHole_d;
-vClampHole_h = vInsertMinDepth_h+0.5;
+vClampHole_d = vInsertM3Hole_d;
+vClampHole_h = vInsertM3MinDepth_h;
 vClampHole_offsetX1 = vLensBoardCutout_offsetX-4;
 vClampHole_offsetX2 = vLensBoardCutout_offsetX+vLensboard_l+4;
 vClampHole_offsetY = 25;

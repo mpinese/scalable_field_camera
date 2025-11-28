@@ -117,9 +117,9 @@ vFocusingBlockCutout_offsetY = vFrontLidInner_offsetY+vFrontLid_wall;
 vFocusingBlockCutout_offsetZ = vFrontLid_wall;
 
 // Insert holes for the stabilizing lid
-vLidHole_d = vInsertHole_d;
-vLidHole_h = vInsertMinDepth_h+0.5;
-assert(vFrontLid_wall >= vInsertMinDepth_h);
+vLidHole_d = vInsertM3Hole_d;
+vLidHole_h = vInsertM3MinDepth_h;
+assert(vFrontLid_wall >= vInsertM3MinDepth_h);
 
 vLidHoleRow_length = (vLidHoleCount_x-1)*vLidHoleDist_x;
 vLidHoleRow_offsetX = -vLidHoleRow_length/2-17.5;
