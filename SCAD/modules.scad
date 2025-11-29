@@ -64,7 +64,7 @@ module tube(d1, d2, h) {
 module countersunk_screw(vScrew_d, vScrew_l){
     union(){
     cylinder(d=vScrew_d, h=vScrew_l);
-    cylinder(d1=vScrew_d*2, h=vScrew_d);
+    cylinder(d1=vScrew_d*2, d2=0, h=vScrew_d);
     };
 };
 
@@ -126,6 +126,10 @@ module screw_cs(l, d=3, dk=6, s=2, t=1) {
 
 module screw_m3_cs(l) {
     color("silver") screw_cs(l, d=3, dk=6, s=2, t=1);
+}
+
+module screw_m5_cs(l) {
+    color("silver") screw_cs(l, d=5, dk=9.5, s=3, t=1.6);
 }
 
 // Button head screw, metric, for display
