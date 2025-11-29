@@ -110,8 +110,6 @@ difference(){
            
     };
     
-   
-    // TODO: Heat set insert hole here. For M5 bolt.
     
     // Bolt thread hole
     translate([vScrewHole_offsetX, vScrewHole_offsetY, vScrewHole_offsetZ])

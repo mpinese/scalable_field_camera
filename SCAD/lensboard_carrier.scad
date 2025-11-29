@@ -59,7 +59,7 @@ vBellowsScrewHole_h = vFrontPlate_length;
 vBellowsScrewSinking_d1 = 6;
 vBellowsScrewSinking_h = vBellowsScrewSinking_d1/2;
 vBellowsScrewHole_offsetX = -vFrontPlate_length/2;
-vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2-1.2;   // 1.2 is a fudge factor required to get the lensboard_carrier holes to line up with the front_bellows_frame. TODO: figure out why this is needed.
+vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2-1.25;   // 1.25 is a fudge factor required to get the lensboard_carrier holes to line up with the front_bellows_frame. TODO: figure out why this is needed.
 vBellowsScrewHole_offsetZ = vBellowsCutoutLower_height/2;
 
 vClampHole_d = vInsertM3Hole_d;
@@ -200,12 +200,13 @@ translate([vAxisHole_offsetX, -vAxisHole_offsetY, vAxisHole_offsetZ])
         cylinder(d=vAxisHole_d, h=vAxisHole_h);
 
 // tilt lock bolt holes
+assert(vTiltLockBolt_h >= vInsertM5MinDepth_h);
 translate([vTiltLockBolt_offsetX, vTiltLockBolt_offsetY, vTiltLockBolt_offsetZ])
         rotate([-90, 0, 0])
-            cylinder(d=vTiltLockBoltHole_d, h=vTiltLockBoltHole_h);
+            cylinder(d=vInsertM5Hole_d, h=vTiltLockBolt_h);
     translate([vTiltLockBolt_offsetX, -vTiltLockBolt_offsetY, vTiltLockBolt_offsetZ])
         rotate([90, 0, 0])
-            cylinder(d=vTiltLockBoltHole_d, h=vTiltLockBoltHole_h);
+            cylinder(d=vInsertM5Hole_d, h=vTiltLockBolt_h);
 
 
 

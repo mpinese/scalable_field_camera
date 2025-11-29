@@ -128,6 +128,9 @@ module screw_m3_cs(l) {
     color("silver") screw_cs(l, d=3, dk=6, s=2, t=1);
 }
 
+module screw_m2_cs(l) {
+    color("silver") screw_cs(l, d=2, dk=3.8, s=1.5, t=0.75);
+}
 module screw_m5_cs(l) {
     color("silver") screw_cs(l, d=5, dk=9.5, s=3, t=1.6);
 }
@@ -163,3 +166,46 @@ module screw_m2_bh(l) {
 module screw_m3_bh(l) {
     color("silver") screw_bh(l, d=3, dk=5.7, s=2, t=1);
 }
+
+
+module nut_m5() {
+    difference() {
+        rotate([0, 0, 30]) cylinder(h=3.9, d=8*2/sqrt(3), $fn=6);
+        cylinder(h=5, d=5, $fn=15);
+        }
+    }
+    
+    
+module thumbscrew(bolt_d, bolt_dk, screw_d, screw_h, n_knurls, knurl_d, knurl_f) {
+    // bolt_d:  central bolt diameter
+    // bolt_dk: bolt head max diameter
+    // screw_d: thumbscrew outer diameter
+    // screw_h: thumbscrew height
+    // n_knurls: number of knurls
+    
+    min_knurl_offset = screw_d/2 - knurl_d;
+    max_knurl_offset = screw_d/2 + knurl_d;
+    knurl_offset = min_knurl_offset + knurl_f*(max_knurl_offset - min_knurl_offset);
+    
+    difference()
+    {
+        union()
+        {
+            translate([0, 0, 1]) cylinder(screw_h-2, d=screw_d);
+            cylinder(1, d1=screw_d-1, d2=screw_d);
+            translate([0, 0, screw_h-1]) cylinder(1, d1=screw_d, d2=screw_d-1);
+        }
+        cylinder(screw_h, d=bolt_d);
+        cylinder(bolt_dk/2, d1=bolt_dk, d2=0);
+        for (i = [1:n_knurls])
+        {
+            rotate([0, 0, i*360/(n_knurls)]) translate([knurl_offset, 0, 0]) cylinder(screw_h, d=knurl_d);
+        }
+    }
+}
+
+module thumbscrew_m5(screw_d, screw_h, n_knurls, knurl_d, knurl_f)
+{
+    thumbscrew(5, 9.5, screw_d, screw_h, n_knurls, knurl_d, knurl_f);
+}
+thumbscrew_m5(screw_d=20, screw_h=7.5, n_knurls=12, knurl_d=3, knurl_f=0.6);

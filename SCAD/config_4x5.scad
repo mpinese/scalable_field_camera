@@ -156,8 +156,8 @@ vAxisHole_h = vDoveTail_w+vTolerance;
 
 vTiltLockBolt_d = 12;
 vTiltLockBolt_h = 14;
-vTiltLockBoltHole_d = 8;
-vTiltLockBoltHole_h = vTiltLockBolt_h;
+//vTiltLockBoltHole_d = 8;
+//vTiltLockBoltHole_h = vTiltLockBolt_h;
 
 vTiltHeight = 50;
 vTiltRadius = vFrontPlate_length/2;
@@ -190,12 +190,12 @@ vScrew2ThreadHole_d = 1.4;
 
 
 // Dimensions for small heat set insert holes.
-// Sized for M2 inserts, 4 mm depth, 3.5 mm max OD
-// (may be labelled M2x3.5x4)
+// Sized for M2 inserts, 3 mm depth, 3.5 mm max OD
+// (may be labelled M2x3.5x3)
 vInsertM2Hole_d = 3.2;
-vInsertM2MinDepth_h = 5.0;
+vInsertM2MinDepth_h = 4.0;
 vInsertM2Size_d = 3.5;
-vInsertM2Depth_h = 4.0;
+vInsertM2Depth_h = 3.0;
 
 // Dimensions for heat set insert holes.
 // Sized for "Voron standard" M3 inserts, 4 mm depth, 5 mm max OD
