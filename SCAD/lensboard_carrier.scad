@@ -63,7 +63,7 @@ vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2;
 vBellowsScrewHole_offsetZ = vBellowsCutoutLower_height/2;
 
 vClampHole_d = vInsertM3Hole_d;
-vClampHole_h = vInsertM3MinDepth_h;
+vClampHole_h = vInsertM3MinDepth_h+1;   // Add a small offset to enable the use of 8mm screws here
 vClampHole_offsetX1 = vLensBoardCutout_offsetX-4;
 vClampHole_offsetX2 = vLensBoardCutout_offsetX+vLensboard_l+4;
 vClampHole_offsetY = 25;
@@ -177,16 +177,16 @@ translate([-vBellowsScrewHole_offsetX, -vBellowsScrewHole_offsetY, vBellowsScrew
         cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
 
 // horizontal
-translate([vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+translate([vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX-vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([90, 0, 0])
         cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX-vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([90, 0, 0])
         cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+translate([vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX+vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([-90, 0, 0])
         cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([-vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+translate([-vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX+vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([-90, 0, 0])
         cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
 
