@@ -132,10 +132,10 @@ difference(){
     translate([vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, -90, 0])
             cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h+1);
-    translate([vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+    translate([-vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, 90, 0])
             cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h+1);
-    translate([vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+    translate([-vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, 90, 0])
             cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h+1);
     translate([vBellowsScrew_offsetY, vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
