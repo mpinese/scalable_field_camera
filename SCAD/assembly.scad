@@ -24,6 +24,30 @@ use <slider.scad>;
 use <tripod_plate.scad>;
 use <modules.scad>;
 
+
+/* TODO list    
+
+ * Handle
+
+ * Fix the hinge screw sticking out
+
+ * Grub for the focus knob.
+ * Constraint on the lead screw
+ 
+ * Consider replacing all M2s with M3s, to simplify BOM
+ * Scale for bellows extension?
+ * Consider moving to MGN7 instead of the dovetail
+ 
+*/
+
+/* Additional parts for BOM:
+- bellows, for 4x5" order the bellows from standardcameras, for 5x7 or 8x10 order from eBay
+- ground glass 127x101mm
+- about 600mm of 1.25mm spring steel wire for the ground glass frame
+- about 100mm of 0.75mm spring steel wire for the pulling lever mechanism    
+*/
+
+
 mode = "display";
 //mode = "print";
 
@@ -34,9 +58,12 @@ if (mode == "display")
     color("red") translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
     color("green") translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
     color("blue") translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
-    color("grey") translate([64, -68, 10]) rotate([90, 0, 90]) focus_wheel();
-    color("teal") translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();
-
+    color("grey") translate([65, -68, 10]) rotate([90, 0, 90]) focus_wheel();
+    color("teal") translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();     
+    
+    //translate([62.5, -68, 10]) rotate([0, 90, 0]) AXK0619_thrust_bearing();
+    //translate([62.5, -68, 10]) rotate([0, 90, 0]) t6_flange_coupler();
+    
     color("forestgreen") translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
     color("grey") translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
     color("grey") translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
@@ -67,8 +94,6 @@ if (mode == "display")
     color("white") translate([-152.5, 80, 10]) rotate([90, 0, 270]) locking_rail();
     color("lightyellow") translate([-152.5, -80, 10]) rotate([270, 0, 90]) scale([1, -1, 1]) locking_rail();
     
-    
-    // TODO: add to printing
     // front_standard_tilt_plate bolts
     translate([0, -78, 112]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
     translate([0, 78, 112]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
@@ -78,54 +103,17 @@ if (mode == "display")
     // for pulling_lever_plate front swing screw
     translate([0, 0, 37]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
     
-    
-    // TODO: Consider replacing all M2s with M3s, to simplify BOM
-    
-    /* Additional parts:  
-- bellows, for 4x5" order the bellows from standardcameras, for 5x7 or 8x10 order from eBay
-- T6 nut (brass) 
-- ground glass 127x101mm
-- about 600mm of 1.25mm spring steel wire for the ground glass frame
-- about 100mm of 0.75mm spring steel wire for the pulling lever mechanism    
-    */
-    
-    // TODO: grub for the focus knob.
-    // TODO: scale for bellows extension?
-    // TODO: Handle
-    // TODO: Fix the hinge screw sticking out
-    // TODO: Constraint on the lead screw
-    //      Collars + thrust bearings / thrust bearings on focusing block.
-    // TODO: Why does the focus wheel have a larger cutout?
-    
+    // for screw into tripod_plate
+    translate([-142.5, 0, -13.5]) rotate([0, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+
     // Leadscrew, (T6, 2 or 4mm lead, 150mm)
-    color("gold") translate([-60, -68, 11]) rotate([90, 0, 90]) cylinder(h=150, d=6);
-    // Leadscrew flange
-    // Flange coupler 6mm
-    // TODO
-    
+    translate([-62, -68, 11]) rotate([90, 0, 90]) t6_lead_screw(150);
+        
     // TODO: Fix Leadscrew nut
-    translate([-39, -68, 11]) rotate([0, 90, 0]) difference() {
-        union() {
-            cylinder(h=15, d=10.2);
-            translate([0, 0, 1.5]) cylinder(h=3.5, d=22);
-        }
-        cylinder(h=15, d=6);
-    }
-    
-    // TODO: Consider moving to MGN7 instead of the dovetail
-    // There is just enough room for the outer profile of 17w x 8h
-    // (rail + bearing). Bearing length for MGN7C is 13.5 mm.
-    // translate([50, -50, 5]) cube([50, 17, 8]);
-    
-    %translate([81.25, -65, 0]) rotate([0, 90, 0]) cylinder(1.25, d=20);
-    %translate([62.5, -65, 0]) rotate([0, 90, 0]) cylinder(1.5, d=20);
-    // Total space: 2.75 mm
-    // Can shrink wheel if required.
-    // Thrust bearings typically 4 mm each (needle), 4.5 mm (ball)
-    
+    translate([-39, -68, 11]) rotate([0, 90, 0]) t6_lead_screw_nut();
     
     // Hinge screw (M5 threaded rod, 180mm)
-    color("silver") translate([-87.5, 90, 10]) rotate([90, 0, 0]) cylinder(h=180, d=5);
+    translate([-87.5, 90, 10]) rotate([90, 0, 0]) m5_rod(180);
     
     // focusing_block inserts
     translate([87.5, -60, 5]) insert_m3();
@@ -311,7 +299,7 @@ if (mode == "display")
     // Vertical section
     *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
     // Horizontal section
-    *translate([-5000, -5000, 112]) cube([10000, 10000, 10000]);
+    *translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")
@@ -352,6 +340,18 @@ else if (mode == "print")
     color("black") translate([200, 650, 0]) locking_lever();
     color("white") translate([300, 600, 0]) rotate([0, 180, 0]) locking_rail();
     color("lightyellow") translate([300, 650, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();
+    
+    // front_standard_tilt_plate bolts
+    translate([400, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    translate([400, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    translate([400, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    translate([450, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    
+    // for pulling_lever_plate front swing screw
+    translate([450, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+    
+    // for screw into tripod_plate
+    translate([450, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
 }
 
 

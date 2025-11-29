@@ -86,6 +86,7 @@ module hex(kw, h) {
 // l: Total length
 module insert(d, od, l)
 {
+    echo(Insert = d, od, l);
     difference() {
         cylinder(l, d=od, $fn=15);
         translate([0, 0, -0.5]) cylinder(l+1, d=d, $fn=15);
@@ -115,6 +116,7 @@ module screw_cs(l, d=3, dk=6, s=2, t=1) {
     // dk: max head diameter
     // s: hex socket flat-to-flat size
     // t: hex socket depth
+    echo(CountersunkScrew = d, l);
     difference() {
         union() {
             cylinder(h=l, r=d/2, $fn=15);
@@ -144,6 +146,7 @@ module screw_bh(l, d=3, k=1.5, dk=5.5, s=2, t=1) {
     // dk: head max diameter
     // s: hex socket flat-to-flat size
     // t: hex socket depth
+    echo(BallheadScrew = d, l);
     difference() {
         union() {
             translate([0, 0, k]) cylinder(h=l, r=d/2, $fn=15);
@@ -169,6 +172,7 @@ module screw_m3_bh(l) {
 
 
 module nut_m5() {
+    echo(Nut = 5);
     difference() {
         rotate([0, 0, 30]) cylinder(h=3.9, d=8*2/sqrt(3), $fn=6);
         cylinder(h=5, d=5, $fn=15);
@@ -204,8 +208,55 @@ module thumbscrew(bolt_d, bolt_dk, screw_d, screw_h, n_knurls, knurl_d, knurl_f)
     }
 }
 
-module thumbscrew_m5(screw_d, screw_h, n_knurls, knurl_d, knurl_f)
-{
+module thumbscrew_m5(screw_d, screw_h, n_knurls, knurl_d, knurl_f) {
     thumbscrew(5, 9.5, screw_d, screw_h, n_knurls, knurl_d, knurl_f);
 }
-thumbscrew_m5(screw_d=20, screw_h=7.5, n_knurls=12, knurl_d=3, knurl_f=0.6);
+
+
+module t6_flange_coupler() {
+    // T6 flange coupler
+    // Example: https://www.aliexpress.com/item/1005008049363389.html
+    echo(FlangeCoupler = 6);
+    difference() {
+        union() {
+            translate([0, 0, 2]) cylinder(h=10, d=10);
+            cylinder(h=2, d=22);
+        }
+        cylinder(h=12, d=6);
+        translate([0, 15, 7]) rotate([90, 0, 0]) cylinder(h=30, d=3);
+        for (i = [0:3]) {
+            rotate([0, 0, 45+90*i]) translate([-8, 0, 0]) cylinder(h=2, d=3);
+        }
+    }
+}
+
+
+module AXK0619_thrust_bearing() {
+    echo(ThrustBearing = "AXK0619");
+    difference() {
+        cylinder(h=4, d=19);
+        cylinder(h=4, d=6);
+    }
+}
+
+
+module t6_lead_screw(l) {
+    echo(LeadScrewT6 = l);
+    color("silver") cylinder(h=l, d=6);
+}
+
+module t6_lead_screw_nut() {
+    echo("LeadScrewT6Nut");
+    difference() {
+        union() {
+            cylinder(h=15, d=10.2);
+            translate([0, 0, 1.5]) cylinder(h=3.5, d=22);
+        }
+        cylinder(h=15, d=6);
+    }  
+}
+
+module m5_rod(l) {
+    echo(ThreadedRodM5 = l);
+    color("silver") cylinder(h=l, d=5);
+}
