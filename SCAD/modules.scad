@@ -159,3 +159,7 @@ module screw_bh(l, d=3, k=1.5, dk=5.5, s=2, t=1) {
 module screw_m2_bh(l) {
     color("silver") screw_bh(l, d=2, dk=3.4, s=1.175, t=0.6);
 }
+
+module screw_m3_bh(l) {
+    color("silver") screw_bh(l, d=3, dk=5.7, s=2, t=1);
+}

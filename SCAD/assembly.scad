@@ -32,14 +32,14 @@ if (mode == "display")
     difference() {
     union() {
     *color("red") translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
-    color("green") translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
-    color("blue") translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
+    *color("green") translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
+    *color("blue") translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
     color("grey") translate([64, -68, 10]) rotate([90, 0, 90]) focus_wheel();
     color("teal") translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();
 
-    color("forestgreen") translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
-    color("grey") translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
-    color("grey") translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
+    *color("forestgreen") translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
+    *color("grey") translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
+    *color("grey") translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
 
     color("yellow") translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
     color("lightgreen") translate([0, 0, 27]) rotate([0, 180, 180]) slider();
@@ -53,7 +53,7 @@ if (mode == "display")
 
     *color("darkgrey") translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
 
-    color("lightgrey") translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
+    *color("lightgrey") translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
     color("lightgrey") translate([-8, 0, 110]) rotate([0, 90, 0]) bellows_front_frame();
 
     *translate([-25, 0, 0]) rotate([180, 0, 0]) front_lid_dovetail();
@@ -185,17 +185,14 @@ if (mode == "display")
     translate([-136.5, -70, 175.5]) insert_m3();
     translate([-136.5, 70, 175.5]) insert_m3();
 
-    #translate([-137, -39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
-    #translate([-137, 39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
-    #translate([-137, -39.5, 20.5+2]) insert_m3();
-    #translate([-137, 39.5, 20.5+2]) insert_m3();
-    #translate([-137, 79.5-2, 60.5]) rotate([90, 0, 0]) insert_m3();
-    #translate([-137, 79.5-2, 139.5]) rotate([90, 0, 0]) insert_m3();
-    #translate([-137, -79.5+2, 60.5]) rotate([-90, 0, 0]) insert_m3();
-    #translate([-137, -79.5+2, 139.5]) rotate([-90, 0, 0]) insert_m3();
-    
-    // TODO: Check CS screw cutouts. The original seems to be more acute than 90 deg CS.
-    // See eg bellows_back_frame
+    translate([-137, -39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
+    translate([-137, 39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
+    translate([-137, -39.5, 20.5+2]) insert_m3();
+    translate([-137, 39.5, 20.5+2]) insert_m3();
+    translate([-137, 79.5-2, 60.5]) rotate([90, 0, 0]) insert_m3();
+    translate([-137, 79.5-2, 139.5]) rotate([90, 0, 0]) insert_m3();
+    translate([-137, -79.5+2, 60.5]) rotate([-90, 0, 0]) insert_m3();
+    translate([-137, -79.5+2, 139.5]) rotate([-90, 0, 0]) insert_m3();
     
     // bellows_back_frame screws
     translate([-137, -39.5, 179.5]) rotate([180, 0, 0]) screw_m3_cs(10);
@@ -207,9 +204,28 @@ if (mode == "display")
     translate([-137, -79.5, 60.5]) rotate([-90, 0, 0]) screw_m3_cs(10);
     translate([-137, -79.5, 139.5]) rotate([-90, 0, 0]) screw_m3_cs(10);
     
+    // ground_glass_frame inserts
+    translate([-171, -60.5, 97]) rotate([-90, 0, 0]) insert_m2();
+    translate([-171, 60.5, 97]) rotate([90, 0, 0]) insert_m2();
+    translate([-167.5, -15, 28.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-167.5, 15, 28.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-167.5, -15, 165.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-167.5, 15, 165.5]) rotate([0, 90, 0]) insert_m2();
+    
+    // ground_glass_frame screws
+    translate([-171, -65, 97]) rotate([-90, 0, 0]) screw_m2_bh(8);
+    translate([-171, 65, 97]) rotate([90, 0, 0]) screw_m2_bh(8);
+
+    // ground_glass_clamp screws
+    translate([-172.5, -15, 28.5]) rotate([0, 90, 0]) screw_m2_bh(8);
+    translate([-172.5, 15, 28.5]) rotate([0, 90, 0]) screw_m2_bh(8);
+    translate([-172.5, -15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
+    translate([-172.5, 15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
     }
     // Vertical section
-    translate([-137, -5000, -5000]) cube([1000, 10000, 10000]);
+    *translate([-137, -5000, -5000]) cube([1000, 10000, 10000]);
+    // Horizontal section
+    *translate([-5000, -5000, 165.5]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")
