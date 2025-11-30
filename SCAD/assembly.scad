@@ -28,18 +28,11 @@ use <modules.scad>;
 /* TODO list    
 
  * Handle
- 
-//t6_lead_screw_nut();
-// TODO: fix this
 
+ * Lead screw nut needs to be designed by object, as no design available.
+ 
  * Fix the hinge screw sticking out
 
- * Grub for the focus knob.
- * Constraint on the lead screw
- * Fix the lead screw nut -- doesn't fit atm
- * Lead screw backlash? ABNs only common for T8.
- * Upgrade lead screw to T8?? Or T4??
- 
  * Consider replacing all M2s with M3s, to simplify BOM
  * Scale for bellows extension?
  * Consider moving to MGN7 instead of the dovetail
@@ -57,60 +50,75 @@ use <modules.scad>;
 mode = "display";
 //mode = "print";
 
+col_controls="white";
+col_general="LightGray";
+col_structural="DimGray";
+
 if (mode == "display")
 {
     difference() {
     union() {
-    color("red") translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
-    color("green") translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
-    color("blue") translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
-    color("grey") translate([65, -68, 10]) rotate([90, 0, 90]) focus_wheel();
-    color("teal") translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();     
+    color(col_structural) translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
+    color(col_structural) translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
+    color(col_structural) translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
+    color(col_controls) translate([63.5, -68, 10]) rotate([90, 0, 90]) focus_wheel();
+    color(col_structural) translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();     
     
-    //translate([62.5, -68, 10]) rotate([0, 90, 0]) AXK0619_thrust_bearing();
-    //translate([62.5, -68, 10]) rotate([0, 90, 0]) t6_flange_coupler();
+    color(col_structural) translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
+    color(col_general) translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
+    color(col_general) translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
+
+    color(col_structural) translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
+    color(col_structural) translate([0, 0, 27]) rotate([0, 180, 180]) slider();
+    color(col_structural) translate([-50, 0, 5]) rotate([0, 0, 0]) rails();
+    color(col_structural) translate([0, -65, 62]) rotate([0, 270, 270]) front_standard_tilt_plate();
+    color(col_structural) translate([0, 65, 62]) rotate([0, 270, 90]) front_standard_tilt_plate();
+
+    color(col_structural) translate([-8.5, 0, 112]) rotate([0, 90, 0]) lensboard_carrier();
+    color(col_controls) translate([7.5, 0, 173.5]) rotate([0, 90, 0]) lensboard_upper_clamp();
+    color(col_controls) translate([10.5, 0, 54.5]) rotate([0, 270, 0]) lensboard_lower_clamp();
+
+    color(col_structural) translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
+
+    color(col_general) translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
+    color(col_general) translate([-8, 0, 112]) rotate([0, 90, 0]) bellows_front_frame();
+
+    color(col_structural) translate([-25, 0, 0]) rotate([180, 0, 0]) front_lid_dovetail();
+
+    color(col_structural) translate([-10, 0, 16]) rotate([0, 0, 0]) pulling_lever_plate();
+    color(col_controls) translate([-10, -25, 18]) rotate([0, 0, 0]) pulling_lever();
+    color(col_controls) translate([-10, 25, 18]) rotate([0, 0, 0]) scale([1, -1, 1]) pulling_lever();
+
+    color(col_controls) translate([-156.5, -85, 190]) rotate([0, 90, 0]) locking_lever();
+    color(col_controls) translate([-152.5, 85, 190]) rotate([180, 90, 0]) locking_lever();
+    color(col_controls) translate([-152.5, 80, 10]) rotate([90, 0, 270]) locking_rail();
+    color(col_controls) translate([-152.5, -80, 10]) rotate([270, 0, 90]) scale([1, -1, 1]) locking_rail();
+
+    // Focus wheel inserts
+    translate([69.5, -75, 10]) rotate([90, 0, 0]) insert_m3();
+    translate([69.5, -57, 10]) rotate([90, 0, 0]) insert_m3();
     
-    color("forestgreen") translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
-    color("grey") translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
-    color("grey") translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
-
-    color("yellow") translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
-    color("lightgreen") translate([0, 0, 27]) rotate([0, 180, 180]) slider();
-    color("pink") translate([-50, 0, 5]) rotate([0, 0, 0]) rails();
-    color("lightblue") translate([0, -65, 62]) rotate([0, 270, 270]) front_standard_tilt_plate();
-    color("lightblue") translate([0, 65, 62]) rotate([0, 270, 90]) front_standard_tilt_plate();
-
-    color("brown") translate([-8.5, 0, 112]) rotate([0, 90, 0]) lensboard_carrier();
-    color("orange") translate([7.5, 0, 173.5]) rotate([0, 90, 0]) lensboard_upper_clamp();
-    color("salmon") translate([10.5, 0, 54.5]) rotate([0, 270, 0]) lensboard_lower_clamp();
-
-    color("darkgrey") translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
-
-    color("lightgrey") translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
-    color("lightgrey") translate([-8, 0, 112]) rotate([0, 90, 0]) bellows_front_frame();
-
-    translate([-25, 0, 0]) rotate([180, 0, 0]) front_lid_dovetail();
-
-    color("silver") translate([-10, 0, 16]) rotate([0, 0, 0]) pulling_lever_plate();
-    color("purple") translate([-10, -25, 18]) rotate([0, 0, 0]) pulling_lever();
-    color("magenta") translate([-10, 25, 18]) rotate([0, 0, 0]) scale([1, -1, 1]) pulling_lever();
-
-    color("black") translate([-156.5, -85, 190]) rotate([0, 90, 0]) locking_lever();
-    color("black") translate([-152.5, 85, 190]) rotate([180, 90, 0]) locking_lever();
-    color("white") translate([-152.5, 80, 10]) rotate([90, 0, 270]) locking_rail();
-    color("lightyellow") translate([-152.5, -80, 10]) rotate([270, 0, 90]) scale([1, -1, 1]) locking_rail();
+    // Focus wheel grub screws
+    translate([69.5, -71, 10]) rotate([90, 0, 0]) screw_m3_grub(8);
+    translate([69.5, -57, 10]) rotate([90, 0, 0]) screw_m3_grub(8);
+    
+    // Focus wheel preload
+    color("red") translate([80.5, -68, 10]) rotate([0, 90, 0]) washer_m6();
+    color("orange") translate([81.25, -68, 10]) rotate([0, 90, 0]) springwasher_m6();
+    color("red") translate([81.75, -68, 10]) rotate([0, 90, 0]) washer_m6();
+    color("red") translate([62.5, -68, 10]) rotate([0, 90, 0]) washer_m6();
     
     // front_standard_tilt_plate bolts
-    translate([0, -78, 112]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([0, 78, 112]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([0, -73, 170]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([0, 73, 170]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([0, -78, 112]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([0, 78, 112]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([0, -73, 170]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([0, 73, 170]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
     
     // for pulling_lever_plate front swing screw
-    translate([0, 0, 37]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([0, 0, 37]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
     
     // for screw into tripod_plate
-    translate([-142.5, 0, -13.5]) rotate([0, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([-142.5, 0, -13.5]) rotate([0, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
 
     // Leadscrew, (T6, 2 or 4mm lead, 150mm)
     translate([-62, -68, 11]) rotate([90, 0, 90]) t6_lead_screw(150);
@@ -305,7 +313,7 @@ if (mode == "display")
     // Vertical section
     *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
     // Horizontal section
-    *translate([-5000, -5000, 139.5]) cube([10000, 10000, 10000]);
+    *translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")

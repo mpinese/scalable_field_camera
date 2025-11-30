@@ -146,7 +146,7 @@ module screw_bh(l, d=3, k=1.5, dk=5.5, s=2, t=1) {
     // dk: head max diameter
     // s: hex socket flat-to-flat size
     // t: hex socket depth
-    echo(BallheadScrew = d, l);
+    echo(ButtonheadScrew = d, l);
     difference() {
         union() {
             translate([0, 0, k]) cylinder(h=l, r=d/2, $fn=15);
@@ -269,4 +269,25 @@ module m5_rod(l) {
 module screw_m3_grub(l) {
     echo(GrubScrew = 3, l);
     cylinder(h=l, d=3, $fn=15);
+}
+
+
+module washer_m6() {
+    // M6x12x0.8 washer
+    echo(Washer = 6, 0.8);
+    difference() {
+        cylinder(h=0.8, d=12);
+        cylinder(h=0.8, d=6.6);
+    }
+}
+
+
+module springwasher_m6() {
+    // M6x12x1.5 washer (compresses to 0.5)
+    // Show as compressed (~0.5 mm height)
+    echo(SpringWasher = 6);
+    difference() {
+        cylinder(h=0.5, d=12);
+        cylinder(h=0.6, d=6);
+    }
 }
