@@ -28,11 +28,17 @@ use <modules.scad>;
 /* TODO list    
 
  * Handle
+ 
+//t6_lead_screw_nut();
+// TODO: fix this
 
  * Fix the hinge screw sticking out
 
  * Grub for the focus knob.
  * Constraint on the lead screw
+ * Fix the lead screw nut -- doesn't fit atm
+ * Lead screw backlash? ABNs only common for T8.
+ * Upgrade lead screw to T8?? Or T4??
  
  * Consider replacing all M2s with M3s, to simplify BOM
  * Scale for bellows extension?
@@ -109,8 +115,8 @@ if (mode == "display")
     // Leadscrew, (T6, 2 or 4mm lead, 150mm)
     translate([-62, -68, 11]) rotate([90, 0, 90]) t6_lead_screw(150);
         
-    // TODO: Fix Leadscrew nut
-    translate([-39, -68, 11]) rotate([0, 90, 0]) t6_lead_screw_nut();
+    // Leadscrew nut
+    translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
     
     // Hinge screw (M5 threaded rod, 180mm)
     translate([-87.5, 90, 10]) rotate([90, 0, 0]) m5_rod(180);
@@ -162,33 +168,33 @@ if (mode == "display")
     translate([-137, 85, 170]) rotate([90, 0, 0]) screw_m3_cs(10);  // side into bellows_back_frame
     
     // bellows_back_frame inserts
-    translate([-137, -75.5, 30]) rotate([90, 0, 0]) insert_m3();
-    translate([-137, 75.5, 30]) rotate([-90, 0, 0]) insert_m3();
-    translate([-137, -75.5, 170]) rotate([90, 0, 0]) insert_m3();
-    translate([-137, 75.5, 170]) rotate([-90, 0, 0]) insert_m3();
+    translate([-136.5, -75.5, 30]) rotate([90, 0, 0]) insert_m3();
+    translate([-136.5, 75.5, 30]) rotate([-90, 0, 0]) insert_m3();
+    translate([-136.5, -75.5, 170]) rotate([90, 0, 0]) insert_m3();
+    translate([-136.5, 75.5, 170]) rotate([-90, 0, 0]) insert_m3();
     translate([-136.5, -70, 20.5]) insert_m3();
     translate([-136.5, 70, 20.5]) insert_m3();
     translate([-136.5, -70, 175.5]) insert_m3();
     translate([-136.5, 70, 175.5]) insert_m3();
 
-    translate([-137, -39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
-    translate([-137, 39.5, 179.5-2]) rotate([180, 0, 0]) insert_m3();
-    translate([-137, -39.5, 20.5+2]) insert_m3();
-    translate([-137, 39.5, 20.5+2]) insert_m3();
-    translate([-137, 79.5-2, 60.5]) rotate([90, 0, 0]) insert_m3();
-    translate([-137, 79.5-2, 139.5]) rotate([90, 0, 0]) insert_m3();
-    translate([-137, -79.5+2, 60.5]) rotate([-90, 0, 0]) insert_m3();
-    translate([-137, -79.5+2, 139.5]) rotate([-90, 0, 0]) insert_m3();
+    translate([-136.5, -39.5, 179.5]) rotate([180, 0, 0]) insert_m3();
+    translate([-136.5, 39.5, 179.5]) rotate([180, 0, 0]) insert_m3();
+    translate([-136.5, -39.5, 20.5]) insert_m3();
+    translate([-136.5, 39.5, 20.5]) insert_m3();
+    translate([-136.5, 78.5, 60.5]) rotate([90, 0, 0]) insert_m3();
+    translate([-136.5, 78.5, 139.5]) rotate([90, 0, 0]) insert_m3();
+    translate([-136.5, -78.5, 60.5]) rotate([-90, 0, 0]) insert_m3();
+    translate([-136.5, -78.5, 139.5]) rotate([-90, 0, 0]) insert_m3();
     
     // bellows_back_frame screws
-    translate([-137, -39.5, 179.5]) rotate([180, 0, 0]) screw_m3_cs(10);
-    translate([-137, 39.5, 179.5]) rotate([180, 0, 0]) screw_m3_cs(10);
-    translate([-137, -39.5, 20.5]) screw_m3_cs(10);
-    translate([-137, 39.5, 20.5]) screw_m3_cs(10);
-    translate([-137, 79.5, 60.5]) rotate([90, 0, 0]) screw_m3_cs(10);
-    translate([-137, 79.5, 139.5]) rotate([90, 0, 0]) screw_m3_cs(10);
-    translate([-137, -79.5, 60.5]) rotate([-90, 0, 0]) screw_m3_cs(10);
-    translate([-137, -79.5, 139.5]) rotate([-90, 0, 0]) screw_m3_cs(10);
+    translate([-136.5, -39.5, 179.5]) rotate([180, 0, 0]) screw_m3_grub(8);
+    translate([-136.5, 39.5, 179.5]) rotate([180, 0, 0]) screw_m3_grub(8);
+    translate([-136.5, -39.5, 20.5]) screw_m3_grub(8);
+    translate([-136.5, 39.5, 20.5]) screw_m3_grub(8);
+    translate([-136.5, 79, 60.5]) rotate([90, 0, 0]) screw_m3_grub(8);
+    translate([-136.5, 79, 139.5]) rotate([90, 0, 0]) screw_m3_grub(8);
+    translate([-136.5, -79, 60.5]) rotate([-90, 0, 0]) screw_m3_grub(8);
+    translate([-136.5, -79, 139.5]) rotate([-90, 0, 0]) screw_m3_grub(8);
     
     // ground_glass_frame inserts
     translate([-171, -60.5, 97]) rotate([-90, 0, 0]) insert_m2();
@@ -277,29 +283,29 @@ if (mode == "display")
     translate([-5, -48, 152]) rotate([90, 0, 0]) insert_m3();
     translate([-5, 48, 152]) rotate([-90, 0, 0]) insert_m3();
 
-    translate([-5, -22, 60]) insert_m2();
-    translate([-5, 22, 60]) insert_m2();
-    translate([-5, -22, 160]) insert_m2();
-    translate([-5, 22, 160]) insert_m2();
-    translate([-5, -48, 90]) rotate([90, 0, 0]) insert_m2();
-    translate([-5, 48, 90]) rotate([-90, 0, 0]) insert_m2();
-    translate([-5, -48, 134]) rotate([90, 0, 0]) insert_m2();
-    translate([-5, 48, 134]) rotate([-90, 0, 0]) insert_m2();
+    translate([-5, -22, 60]) insert_m3();
+    translate([-5, 22, 60]) insert_m3();
+    translate([-5, -22, 160]) insert_m3();
+    translate([-5, 22, 160]) insert_m3();
+    translate([-5, -48, 90]) rotate([90, 0, 0]) insert_m3();
+    translate([-5, 48, 90]) rotate([-90, 0, 0]) insert_m3();
+    translate([-5, -48, 134]) rotate([90, 0, 0]) insert_m3();
+    translate([-5, 48, 134]) rotate([-90, 0, 0]) insert_m3();
 
     // bellows_front_frame screws
-    translate([-4.5, -22, 164]) rotate([180, 0, 0]) screw_m2_cs(6);
-    translate([-4.5, 22, 164]) rotate([180, 0, 0]) screw_m2_cs(6);
-    translate([-4.5, -22, 60]) screw_m2_cs(6);
-    translate([-4.5, 22, 60]) screw_m2_cs(6);
-    translate([-4.5, 52, 90]) rotate([90, 0, 0]) screw_m2_cs(6);
-    translate([-4.5, 52, 134]) rotate([90, 0, 0]) screw_m2_cs(6);
-    translate([-4.5, -52, 90]) rotate([-90, 0, 0]) screw_m2_cs(6);
-    translate([-4.5, -52, 134]) rotate([-90, 0, 0]) screw_m2_cs(6);
+    translate([-4.5, -22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
+    translate([-4.5, 22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
+    translate([-4.5, -22, 60]) screw_m3_grub(5);
+    translate([-4.5, 22, 60]) screw_m3_grub(5);
+    translate([-4.5, 51, 90]) rotate([90, 0, 0]) screw_m3_grub(5);
+    translate([-4.5, 51, 134]) rotate([90, 0, 0]) screw_m3_grub(5);
+    translate([-4.5, -51, 90]) rotate([-90, 0, 0]) screw_m3_grub(5);
+    translate([-4.5, -51, 134]) rotate([-90, 0, 0]) screw_m3_grub(5);
     }
     // Vertical section
     *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
     // Horizontal section
-    *translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
+    *translate([-5000, -5000, 139.5]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")

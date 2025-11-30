@@ -247,16 +247,26 @@ module t6_lead_screw(l) {
 
 module t6_lead_screw_nut() {
     echo("LeadScrewT6Nut");
-    difference() {
-        union() {
-            cylinder(h=15, d=10.2);
-            translate([0, 0, 1.5]) cylinder(h=3.5, d=22);
-        }
-        cylinder(h=15, d=6);
-    }  
+    intersection()
+    {
+        difference() {
+            union() {
+                cylinder(h=15, d=12);
+                translate([0, 0, 1.5]) cylinder(h=3.5, d=24);
+            }
+            cylinder(h=15, d=6);
+        }  
+        translate([-50, -12.5/2, -50]) cube([100, 12.5, 100]);
+    }
 }
 
 module m5_rod(l) {
     echo(ThreadedRodM5 = l);
     color("silver") cylinder(h=l, d=5);
+}
+
+
+module screw_m3_grub(l) {
+    echo(GrubScrew = 3, l);
+    cylinder(h=l, d=3, $fn=15);
 }
