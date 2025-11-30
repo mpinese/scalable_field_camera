@@ -127,7 +127,7 @@ if (mode == "display")
     translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
     
     // Hinge screw (M5 threaded rod, 180mm)
-    translate([-87.5, 90, 10]) rotate([90, 0, 0]) m5_rod(180);
+    translate([-87.5, 81, 10]) rotate([90, 0, 0]) m5_rod(160);
     
     // focusing_block inserts
     translate([87.5, -60, 5]) insert_m3();
@@ -313,7 +313,7 @@ if (mode == "display")
     // Vertical section
     *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
     // Horizontal section
-    *translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
+    translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")

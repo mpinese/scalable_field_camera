@@ -68,6 +68,7 @@ vHingeTubeInner_d = vHingeHole+vHingeTolerance;
 vHingeTube_offsetX = vFrontLidInner_offsetX;
 vHingeTube_offsetY = -vFrontLidOuter_offsetY;
 vHingeTube_offsetZ = vFrontLidOuter_h;
+vHingeTubeBlind_w = 3;
 
 vHingeCutout_l = 2*vFrontLid_wall;
 vHingeCutout_w = vHingeBaseWidth+vHingeTolerance;
@@ -190,7 +191,7 @@ difference(){
         cube([vRailMidCutout_l, vRailMidCutout_w, vRailMidCutout_h]);
      
     // hinge hole
-    translate([vHingeTube_offsetX, vHingeTube_offsetY, vHingeTube_offsetZ])
+    translate([vHingeTube_offsetX, vHingeTube_offsetY-vHingeTubeBlind_w, vHingeTube_offsetZ])
         rotate([90, 0, 0])
             cylinder(d=vHingeTubeInner_d, h=vHingeTubeOuter_h);
     
