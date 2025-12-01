@@ -21,6 +21,7 @@ use <rails.scad>;
 use <slider.scad>;
 use <tripod_plate.scad>;
 use <lensboard.scad>;
+use <handle_strap.scad>;
 use <modules.scad>;
 
 mode = "display";
@@ -29,6 +30,7 @@ mode = "display";
 col_controls="white";
 col_general="LightGray";
 col_structural="#404040";
+col_flexible="red";
 
 // Keep minimum 120 for slider.scad
 $fn = $preview ? 20 : 120;
@@ -69,11 +71,19 @@ if (mode == "display")
     color(col_general) translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
     color(col_general) translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
     
+    
     // Simple representation of bellows
-    color("darkred") translate([-133, 0, 100]) rotate([0, 90, 0]) rotate([0, 0, 45]) difference() {
+    color("darkred") translate([-133, 0, 100]) multmatrix([
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0.09, 0, 1, 0],
+        [0, 0, 0, 1]])
+    rotate([0, 90, 0]) rotate([0, 0, 45]) difference() {
         cylinder(h = 125, d1=145*sqrt(2), d2=96*sqrt(2), $fn=4);
         cylinder(h = 125, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
     }
+    
+    color(col_flexible) translate([-120, 0, 190]) rotate([0, 0, 90]) handle_strap();
     
     color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
 

@@ -1,8 +1,8 @@
 vHandleStrap_h = 2.0;
-vHandleStrap_w = 10.0;
+vHandleStrap_w = 15.0;
 vHandleStrap_l = 100.0;
 
-vHandleMovement_l = 25.0;
+vHandleMovement_l = 35.0;
 
 vHandleCutout_w = 4.0;
 
