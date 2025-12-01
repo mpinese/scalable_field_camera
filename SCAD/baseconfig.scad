@@ -4,7 +4,6 @@ Here we define some variables which are independent from the camera format
 
 
 // some generic variables
-$fn = 60; // we are using 60 fragments for cylinders and similar objects
 
 // we are including a format specific configuration sheet - but make sure to include only one!
 

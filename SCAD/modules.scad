@@ -260,15 +260,26 @@ module t6_lead_screw_nut() {
     }
 }
 
-module m5_rod(l) {
+module threaded_rod_m5(l) {
     echo(ThreadedRodM5 = l);
     color("silver") cylinder(h=l, d=5);
+}
+
+module smooth_rod_m4(l) {
+    echo(SmoothRodM4 = l);
+    color("silver") cylinder(h=l, d=4);
 }
 
 
 module screw_m3_grub(l) {
     echo(GrubScrew = 3, l);
-    cylinder(h=l, d=3, $fn=15);
+    color("silver") cylinder(h=l, d=3, $fn=15);
+}
+
+
+module screw_m5_grub(l) {
+    echo(GrubScrew = 5, l);
+    color("silver") cylinder(h=l, d=5, $fn=15);
 }
 
 

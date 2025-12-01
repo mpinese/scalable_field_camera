@@ -7,7 +7,7 @@ use <modules.scad>;
 module slider() {
 
 // we have some large rounded objects, so we smooth them a bit more with a higher number of fragments
-$fn = 120; 
+//$fn = 120; 
 
 // base plate
 vFrontStandartBasePlate_d1 = vSliderBase_w-vTolerance; // maybe subtract tolerance here?

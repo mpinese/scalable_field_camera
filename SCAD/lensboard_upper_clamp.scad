@@ -1,5 +1,3 @@
-// some variables
-$fn = 60; // we are using 60 fragments for cylinders and similar objects
 
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;

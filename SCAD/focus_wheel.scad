@@ -3,8 +3,6 @@ use <modules.scad>;
 
 module focus_wheel() {
 
-$fn=60;
-
 vFocusWheel_d = 24;
 vFocusWheel_h = 17;
 vThread_d = 6.2;

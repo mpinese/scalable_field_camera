@@ -1,5 +1,3 @@
-$fn=50;
-
 use <back_plate.scad>;
 use <bellows_back_frame.scad>;
 use <bellows_front_frame.scad>;
@@ -22,7 +20,18 @@ use <pulling_lever_plate.scad>;
 use <rails.scad>;
 use <slider.scad>;
 use <tripod_plate.scad>;
+use <lensboard.scad>;
 use <modules.scad>;
+
+mode = "display";
+//mode = "print";
+
+col_controls="white";
+col_general="LightGray";
+col_structural="#404040";
+
+// Keep minimum 120 for slider.scad
+$fn = $preview ? 20 : 120;
 
 
 /* TODO list    
@@ -30,8 +39,6 @@ use <modules.scad>;
  * Handle
 
  * Lead screw nut needs to be designed by object, as no design available.
- 
- * Fix the hinge screw sticking out
 
  * Consider replacing all M2s with M3s, to simplify BOM
  * Scale for bellows extension?
@@ -47,12 +54,6 @@ use <modules.scad>;
 */
 
 
-mode = "display";
-//mode = "print";
-
-col_controls="white";
-col_general="LightGray";
-col_structural="DimGray";
 
 if (mode == "display")
 {
@@ -67,6 +68,14 @@ if (mode == "display")
     color(col_structural) translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
     color(col_general) translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
     color(col_general) translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
+    
+    // Simple representation of bellows
+    color("darkred") translate([-133, 0, 100]) rotate([0, 90, 0]) rotate([0, 0, 45]) difference() {
+        cylinder(h = 125, d1=145*sqrt(2), d2=96*sqrt(2), $fn=4);
+        cylinder(h = 125, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
+    }
+    
+    color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
 
     color(col_structural) translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
     color(col_structural) translate([0, 0, 27]) rotate([0, 180, 180]) slider();
@@ -126,8 +135,16 @@ if (mode == "display")
     // Leadscrew nut
     translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
     
-    // Hinge screw (M5 threaded rod, 180mm)
-    translate([-87.5, 81, 10]) rotate([90, 0, 0]) m5_rod(160);
+    // Hinge (M4 smooth rod, 160mm, carbon fibre or steel)
+    translate([-87.5, 80, 10]) rotate([90, 0, 0]) smooth_rod_m4(160);
+    
+    // Hinge grub inserts
+    translate([-87.5, -80, 10]) rotate([90, 0, 0]) insert_m5();
+    translate([-87.5, 80, 10]) rotate([-90, 0, 0]) insert_m5();
+    
+    // Hinge grub screws
+    translate([-87.5, -80, 10]) rotate([90, 0, 0]) screw_m5_grub(5);
+    translate([-87.5, 80, 10]) rotate([-90, 0, 0]) screw_m5_grub(5);
     
     // focusing_block inserts
     translate([87.5, -60, 5]) insert_m3();
@@ -313,7 +330,7 @@ if (mode == "display")
     // Vertical section
     *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
     // Horizontal section
-    translate([-5000, -5000, 10]) cube([10000, 10000, 10000]);
+    *translate([-5000, -5000, 100]) cube([10000, 10000, 10000]);
     }
 }
 else if (mode == "print")

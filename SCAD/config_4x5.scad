@@ -98,7 +98,7 @@ vBackPlateStrength = vWall_strength;
 // hinges for front lid
 vHingeInnerDistance = 100;
 vHingeBaseWidth = 20;
-vHingeHole = 5;
+vHingeHole = 4;
 
 // lid lock measures
 vLidLockBase_d = 8;
