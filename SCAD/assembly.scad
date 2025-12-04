@@ -68,9 +68,11 @@ if (mode == "display")
     color(col_structural) translate([52.5, 0, 5]) rotate([0, 0, 0]) focusing_block();     
     
     color(col_structural) translate([-159.5, 0, 97]) rotate([0, 270, 0]) ground_glass_frame();
-    color(col_general) translate([-167.5, 0, 28]) rotate([0, 270, 0]) ground_glass_clamp();
-    color(col_general) translate([-167.5, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
+    color(col_general) translate([-170.5, 0, 28]) rotate([0, 270, 180]) ground_glass_clamp();
+    color(col_general) translate([-170, 0, 165.5]) rotate([0, 90, 0]) ground_glass_clamp();
     
+    // Ground glass
+    color("white", 0.5) translate([-166.3, -101/2, 30]) cube([1.7, 101, 127]);
     
     // Simple representation of bellows
     color("darkred") translate([-133, 0, 100]) multmatrix([
@@ -83,7 +85,7 @@ if (mode == "display")
         cylinder(h = 125, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
     }
     
-    color(col_flexible) translate([-120, 0, 190]) rotate([0, 0, 90]) handle_strap();
+    color(col_flexible) translate([-120, -85, 95]) rotate([90, 90, 0]) handle_strap();
     
     color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
 
@@ -234,10 +236,10 @@ if (mode == "display")
     // ground_glass_frame inserts
     translate([-171, -60.5, 97]) rotate([-90, 0, 0]) insert_m2();
     translate([-171, 60.5, 97]) rotate([90, 0, 0]) insert_m2();
-    translate([-167.5, -15, 28.5]) rotate([0, 90, 0]) insert_m2();
-    translate([-167.5, 15, 28.5]) rotate([0, 90, 0]) insert_m2();
-    translate([-167.5, -15, 165.5]) rotate([0, 90, 0]) insert_m2();
-    translate([-167.5, 15, 165.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-166.5, -15, 28.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-166.5, 15, 28.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-166.5, -15, 165.5]) rotate([0, 90, 0]) insert_m2();
+    translate([-166.5, 15, 165.5]) rotate([0, 90, 0]) insert_m2();
     
     // ground_glass_frame screws
     translate([-171, -65, 97]) rotate([-90, 0, 0]) screw_m2_bh(8);
