@@ -362,56 +362,58 @@ if (mode == "display")
 }
 else if (mode == "print")
 {
-    color("red") translate([0, 0, 0]) body();
+    color(col_structural) translate([0, 0, 0]) body();
     
-    color("green") translate([200, 0, 0]) front_lid();
-    color("blue") translate([400, 0, 0]) back_plate();
-    color("grey") translate([500, 0, 0]) focus_wheel();
-    color("teal") translate([500, 0, 0]) focusing_block();
+    color(col_structural) translate([200, 0, 0]) front_lid();
+    color(col_structural) translate([400, 0, 0]) back_plate();
+    color(col_controls) translate([500, 0, 0]) focus_wheel();
+    color(col_structural) translate([500, 0, 0]) focusing_block();
 
-    color("forestgreen") translate([700, 0, 0]) ground_glass_frame();
-    color("grey") translate([800, 0, 0]) ground_glass_clamp();
-    color("grey") translate([850, 0, 0]) ground_glass_clamp();
+    color(col_structural) translate([700, 0, 0]) ground_glass_frame();
+    color(col_general) translate([800, 0, 0]) ground_glass_clamp();
+    color(col_general) translate([850, 0, 0]) ground_glass_clamp();
 
-    color("yellow") translate([0, 200, 0]) front_standard();
-    color("lightgreen") translate([100, 200, 0]) slider();
-    color("pink") translate([200, 200, 0]) rails();
-    color("lightblue") translate([400, 200, 0]) front_standard_tilt_plate();
-    color("lightblue") translate([400, 250, 0]) front_standard_tilt_plate();
+    color(col_structural) translate([0, 200, 0]) front_standard();
+    color(col_structural) translate([100, 200, 0]) slider();
+    color(col_structural) translate([200, 200, 0]) rails();
+    color(col_structural) translate([400, 200, 0]) front_standard_tilt_plate();
+    color(col_structural) translate([400, 250, 0]) front_standard_tilt_plate();
 
-    color("brown") translate([600, 200, 0]) lensboard_carrier();
-    color("orange") translate([700, 200, 0]) lensboard_upper_clamp();
-    color("salmon") translate([800, 200, 0]) lensboard_lower_clamp();
+    color(col_structural) translate([600, 200, 0]) lensboard_carrier();
+    color(col_structural) translate([700, 200, 0]) lensboard_upper_clamp();
+    color(col_controls) translate([800, 200, 0]) lensboard_lower_clamp();
 
-    color("darkgrey") translate([0, 400, 0]) tripod_plate();
+    color(col_structural) translate([0, 400, 0]) tripod_plate();
 
-    color("lightgrey") translate([300, 400, 0]) bellows_back_frame();
-    color("lightgrey") translate([500, 400, 0]) bellows_front_frame();
+    color(col_general) translate([300, 400, 0]) bellows_back_frame();
+    color(col_general) translate([500, 400, 0]) bellows_front_frame();
 
-    translate([700, 400, 0]) front_lid_dovetail();
+    color(col_structural) translate([700, 400, 0]) front_lid_dovetail();
 
-    color("silver") translate([0, 600, 0]) pulling_lever_plate();
-    color("purple") translate([100, 600, 0]) pulling_lever();
-    color("magenta") translate([100, 650, 0]) scale([1, -1, 1]) pulling_lever();
+    color(col_structural) translate([0, 600, 0]) pulling_lever_plate();
+    color(col_controls) translate([100, 600, 0]) pulling_lever();
+    color(col_controls) translate([100, 650, 0]) scale([1, -1, 1]) pulling_lever();
 
-    color("black") translate([200, 600, 0]) locking_lever();
-    color("black") translate([200, 650, 0]) locking_lever();
-    color("white") translate([300, 600, 0]) rotate([0, 180, 0]) locking_rail();
-    color("lightyellow") translate([300, 650, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();
+    color(col_controls) translate([200, 600, 0]) locking_lever();
+    color(col_controls) translate([200, 650, 0]) locking_lever();
+    color(col_controls) translate([300, 600, 0]) rotate([0, 180, 0]) locking_rail();
+    color(col_controls) translate([300, 650, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();
     
     // front_standard_tilt_plate bolts
-    translate([400, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([400, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([400, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    translate([450, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([400, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([400, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([400, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([450, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
     
     // for pulling_lever_plate front swing screw
-    translate([450, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([450, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
     
     // for screw into tripod_plate
-    translate([450, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+    color(col_controls) translate([450, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+
+    color(col_flexible) translate([500, 600, 0]) rotate([0, 0, 90]) handle_strap();
+    color(col_general) translate([550, 650, 0]) rotate([0, 180, 0]) handle_strap_cover();
+    color(col_general) translate([550, 700, 0]) rotate([0, 180, 0]) handle_strap_cover();
+
+    color(col_structural) translate([700, 700, 0]) rotate([0, 0, 0]) lensboard();
 }
-
-
-
-
