@@ -22,7 +22,10 @@ use <slider.scad>;
 use <tripod_plate.scad>;
 use <lensboard.scad>;
 use <handle_strap.scad>;
+use <handle_strap_cover.scad>;
 use <modules.scad>;
+
+include <baseconfig.scad>;
 
 mode = "display";
 //mode = "print";
@@ -85,7 +88,19 @@ if (mode == "display")
         cylinder(h = 125, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
     }
     
-    color(col_flexible) translate([-120, -85, 95]) rotate([90, 90, 0]) handle_strap();
+    color(col_flexible) translate([-120, -85, 100]) rotate([90, 90, 0]) handle_strap();
+    color(col_general) translate([-120, -85, 100+vStrapHoleDelta]) rotate([90, 90, 0]) handle_strap_cover();
+    color(col_general) translate([-120, -85, 100-vStrapHoleDelta]) rotate([90, -90, 0]) handle_strap_cover();
+    
+    translate([-120, -89, 100 + vStrapHoleDelta + vHandleStrapCoverExtra_l]) rotate([-90, 0, 0]) screw_m3_cs(8);
+    translate([-120, -89, 100 - vStrapHoleDelta - vHandleStrapCoverExtra_l]) rotate([-90, 0, 0]) screw_m3_cs(8);
+    translate([-120, -89, 100 + vStrapHoleDelta + vHandleStrapCoverExtra_l + vStrapHoleSpacing]) rotate([-90, 0, 0]) screw_m3_cs(8);
+    translate([-120, -89, 100 - vStrapHoleDelta - vHandleStrapCoverExtra_l - vStrapHoleSpacing]) rotate([-90, 0, 0]) screw_m3_cs(8);
+    
+    translate([-120, -85, 100 + vStrapHoleDelta + vHandleStrapCoverExtra_l]) rotate([-90, 0, 0]) insert_m3();
+    translate([-120, -85, 100 - vStrapHoleDelta - vHandleStrapCoverExtra_l]) rotate([-90, 0, 0]) insert_m3();
+    translate([-120, -85, 100 + vStrapHoleDelta + vHandleStrapCoverExtra_l + vStrapHoleSpacing]) rotate([-90, 0, 0]) insert_m3();
+    translate([-120, -85, 100 - vStrapHoleDelta - vHandleStrapCoverExtra_l - vStrapHoleSpacing]) rotate([-90, 0, 0]) insert_m3();
     
     color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
 

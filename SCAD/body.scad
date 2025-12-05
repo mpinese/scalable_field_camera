@@ -304,6 +304,15 @@ difference(){
         rotate([0, 90, 0])
             cylinder(d=vLidLockHole_d, h=vLidLockHole_h);
     
+    // Handle strap and cover mounting holes
+    translate([vStrapHoleDelta+vHandleStrapCoverExtra_l, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
+    translate([vStrapHoleDelta+vHandleStrapCoverExtra_l+vStrapHoleSpacing, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);                
+    translate([-vStrapHoleDelta-vHandleStrapCoverExtra_l, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
+    translate([-vStrapHoleDelta-vHandleStrapCoverExtra_l-vStrapHoleSpacing, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
     };
         
  };

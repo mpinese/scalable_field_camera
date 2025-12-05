@@ -302,3 +302,36 @@ module springwasher_m6() {
         cylinder(h=0.6, d=6);
     }
 }
+
+
+module chamfer_cylinder(h, d, c=0) {
+    if (h >= c) {
+        cylinder(h=h-c, d=d);
+        translate([0, 0, h-c]) cylinder(h=c, d1=d, d2=d-c);
+    } else {
+        cylinder(h=h, d=d);
+    }
+}
+
+module chamfer_cube(w, d, h, c=0) {
+    if (h >= c) {
+        difference() {
+            cube([w, d, h]);
+            translate([-c, 0, h]) rotate([0, 45, 0]) cube([sqrt(2)*c, d, sqrt(2)*c]);
+            translate([w-c, 0, h]) rotate([0, 45, 0]) cube([sqrt(2)*c, d, sqrt(2)*c]);
+            translate([0, 0, h-c]) rotate([45, 0, 0]) cube([w, sqrt(2)*c, sqrt(2)*c]);
+            translate([0, d, h-c]) rotate([45, 0, 0]) cube([w, sqrt(2)*c, sqrt(2)*c]);
+        }
+    } else {
+        cube(wdh);
+    }
+}
+
+module rounded_rect(l, w, h) {
+    union()
+    {
+        translate([-l/2+w/2, 0, 0]) cylinder(h=h, d=w);
+        translate([l/2-w/2, 0, 0]) cylinder(h=h, d=w);
+        translate([-(l-w)/2, -w/2, 0]) cube([l-w, w, h]);
+    }
+}

@@ -212,3 +212,17 @@ vInsertM5Hole_d = 6.7;
 vInsertM5MinDepth_h = 6.0;
 vInsertM5Size_d = 7.0;
 vInsertM5Depth_h = 5.0;
+
+
+// Handle strap
+vHandleStrap_h = 2.0;       // Thickness of the strap in mm
+vHandleStrap_w = 15.0;      // Width of the strap in mm
+vHandleStrap_l = 145.0;     // Total length of the strap in mm
+vHandleStrapMovement_l = 35.0;   // Total amount the strap moves, in mm. Each side moves half this amount.
+vHandleStrapCutout_w = 4.0;      // Width of the central cutout, in mm
+vHandleStrapSlotOffsetFar = vHandleStrap_l/2 - vHandleStrap_w/2;
+vHandleStrapSlotOffsetNear = vHandleStrapSlotOffsetFar - vHandleStrapMovement_l/2;
+vHandleStrapCoverExtra_l = 5.0;
+vHandleStrapHoleSize_d = 3.0;
+vStrapHoleDelta = vHandleStrapSlotOffsetNear-vHandleStrapCoverExtra_l+vHandleStrapHoleSize_d/2;
+vStrapHoleSpacing = vHandleStrapMovement_l/2 + vHandleStrap_w/2;
