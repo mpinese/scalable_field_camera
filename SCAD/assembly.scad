@@ -32,9 +32,6 @@ col_general="LightGray";
 col_structural="#404040";
 col_flexible="red";
 
-// Keep minimum 120 for slider.scad
-$fn = $preview ? 20 : 120;
-
 
 /* TODO list    
 

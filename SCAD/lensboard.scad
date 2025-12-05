@@ -1,8 +1,8 @@
 // loading the base configuration
 include <baseconfig.scad>;
 
-vOuterSize_w = vLensboard_l;
-vOuterSize_h = vLensboard_w;
+vOuterSize_w = vLensboard_l-0.5;
+vOuterSize_h = vLensboard_w-0.5;
 vHoleSize_d = 34.6;
 vThickness_d = vLensboard_h;
 vFillet_r = 2.0;
