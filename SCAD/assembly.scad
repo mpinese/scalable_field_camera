@@ -27,9 +27,6 @@ use <modules.scad>;
 
 include <baseconfig.scad>;
 
-mode = "display";
-//mode = "print";
-
 col_controls="white";
 col_general="LightGray";
 col_structural="#404040";
@@ -60,10 +57,8 @@ $fn = $preview ? 20 : 120;
 
 
 
-if (mode == "display")
-{
-    difference() {
-    union() {
+difference() {
+union() {
     color(col_structural) translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
     color(col_structural) translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
     color(col_structural) translate([-147.5, 0, 100]) rotate([0, 270, 0]) back_plate();
@@ -353,67 +348,9 @@ if (mode == "display")
     translate([-4.5, 51, 134]) rotate([90, 0, 0]) screw_m3_grub(5);
     translate([-4.5, -51, 90]) rotate([-90, 0, 0]) screw_m3_grub(5);
     translate([-4.5, -51, 134]) rotate([-90, 0, 0]) screw_m3_grub(5);
-    }
-    // Vertical section
-    *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
-    // Horizontal section
-    *translate([-5000, -5000, 100]) cube([10000, 10000, 10000]);
-    }
 }
-else if (mode == "print")
-{
-    color(col_structural) translate([0, 0, 0]) body();
-    
-    color(col_structural) translate([200, 0, 0]) front_lid();
-    color(col_structural) translate([400, 0, 0]) back_plate();
-    color(col_controls) translate([500, 0, 0]) focus_wheel();
-    color(col_structural) translate([500, 0, 0]) focusing_block();
-
-    color(col_structural) translate([700, 0, 0]) ground_glass_frame();
-    color(col_general) translate([800, 0, 0]) ground_glass_clamp();
-    color(col_general) translate([850, 0, 0]) ground_glass_clamp();
-
-    color(col_structural) translate([0, 200, 0]) front_standard();
-    color(col_structural) translate([100, 200, 0]) slider();
-    color(col_structural) translate([200, 200, 0]) rails();
-    color(col_structural) translate([400, 200, 0]) front_standard_tilt_plate();
-    color(col_structural) translate([400, 250, 0]) front_standard_tilt_plate();
-
-    color(col_structural) translate([600, 200, 0]) lensboard_carrier();
-    color(col_structural) translate([700, 200, 0]) lensboard_upper_clamp();
-    color(col_controls) translate([800, 200, 0]) lensboard_lower_clamp();
-
-    color(col_structural) translate([0, 400, 0]) tripod_plate();
-
-    color(col_general) translate([300, 400, 0]) bellows_back_frame();
-    color(col_general) translate([500, 400, 0]) bellows_front_frame();
-
-    color(col_structural) translate([700, 400, 0]) front_lid_dovetail();
-
-    color(col_structural) translate([0, 600, 0]) pulling_lever_plate();
-    color(col_controls) translate([100, 600, 0]) pulling_lever();
-    color(col_controls) translate([100, 650, 0]) scale([1, -1, 1]) pulling_lever();
-
-    color(col_controls) translate([200, 600, 0]) locking_lever();
-    color(col_controls) translate([200, 650, 0]) locking_lever();
-    color(col_controls) translate([300, 600, 0]) rotate([0, 180, 0]) locking_rail();
-    color(col_controls) translate([300, 650, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();
-    
-    // front_standard_tilt_plate bolts
-    color(col_controls) translate([400, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([400, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([400, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([450, 600, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    
-    // for pulling_lever_plate front swing screw
-    color(col_controls) translate([450, 650, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
-    
-    // for screw into tripod_plate
-    color(col_controls) translate([450, 750, 0]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
-
-    color(col_flexible) translate([500, 600, 0]) rotate([0, 0, 90]) handle_strap();
-    color(col_general) translate([550, 650, 0]) rotate([0, 180, 0]) handle_strap_cover();
-    color(col_general) translate([550, 700, 0]) rotate([0, 180, 0]) handle_strap_cover();
-
-    color(col_structural) translate([700, 700, 0]) rotate([0, 0, 0]) lensboard();
+// Vertical section
+*translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
+// Horizontal section
+*translate([-5000, -5000, 100]) cube([10000, 10000, 10000]);
 }

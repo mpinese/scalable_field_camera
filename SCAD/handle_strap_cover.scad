@@ -24,5 +24,6 @@ difference() {
 
 }
 
-handle_strap_cover();
+translate([0, 0, vHandleStrap_h+2]) rotate([0, 180, 0]) handle_strap_cover();
+translate([0, 50, vHandleStrap_h+2]) rotate([0, 180, 0]) handle_strap_cover();
 

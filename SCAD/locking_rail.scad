@@ -1,6 +1,3 @@
-// some variables
-$fn = 60; // we are using 60 fragments for cylinders and similar objects
-
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
@@ -76,4 +73,6 @@ difference(){
 
 };
 
-locking_rail();
+rotate([0, 180, 0]) locking_rail();
+
+translate([0, 100, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();

@@ -62,4 +62,5 @@ difference(){
 
 };
 
+translate([50, 0, 0]) ground_glass_clamp();
 ground_glass_clamp();

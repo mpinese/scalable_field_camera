@@ -102,3 +102,5 @@ difference(){
 };
 
 pulling_lever();
+
+translate([0, 100, 0]) scale([1, -1, 1]) pulling_lever();

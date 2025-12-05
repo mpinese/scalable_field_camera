@@ -139,3 +139,4 @@ difference(){
 };
 
 front_standard_tilt_plate();
+translate([0, 100, 0]) front_standard_tilt_plate();
