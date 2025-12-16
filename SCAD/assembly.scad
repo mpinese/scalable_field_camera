@@ -119,6 +119,14 @@ union() {
     translate([5, -7.5, 16]) screw_m3_cs(10);
     translate([5, 7.5, 16]) screw_m3_cs(10);
     
+    // slider inserts
+    translate([-15, -7.5, 22]) insert_m3();
+    translate([-15, 7.5, 22]) insert_m3();
+    translate([-10, -25, 23]) insert_m3();
+    translate([-10, 25, 23]) insert_m3();
+    translate([5, -7.5, 22]) insert_m3();
+    translate([5, 7.5, 22]) insert_m3();       
+    
     // pulling_lever_plate hex nut, M5
     translate([0, 0, 19]) nut_m5();
     
@@ -347,14 +355,6 @@ union() {
     translate([-172.5, -15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
     translate([-172.5, 15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
     
-    
-    // slider inserts
-    translate([-15, -7.5, 22]) insert_m3();
-    translate([-15, 7.5, 22]) insert_m3();
-    translate([-10, -25, 23]) insert_m3();
-    translate([-10, 25, 23]) insert_m3();
-    translate([5, -7.5, 22]) insert_m3();
-    translate([5, 7.5, 22]) insert_m3();       
 }
 // Vertical section
 *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
