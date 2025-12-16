@@ -18,19 +18,19 @@ all: $(STRUCTURAL_TARGETS) $(CONTROL_TARGETS) $(GENERAL_TARGETS) $(FLEXIBLE_TARG
 
 $(STL_DIR)/%_structural.stl: $(SCAD_DIR)/%.scad
 	mkdir -p $(STL_DIR)
-	openscad -o $@ $<
+	openscad -o $@ -D '$$fa=1' -D '$$fs=0.5' $<
 
 $(STL_DIR)/%_control.stl: $(SCAD_DIR)/%.scad
 	mkdir -p $(STL_DIR)
-	openscad -o $@ $<
+	openscad -o $@ -D '$$fa=1' -D '$$fs=0.5' $<
 
 $(STL_DIR)/%_general.stl: $(SCAD_DIR)/%.scad
 	mkdir -p $(STL_DIR)
-	openscad -o $@ $<
+	openscad -o $@ -D '$$fa=1' -D '$$fs=0.5' $<
 
 $(STL_DIR)/%_flexible.stl: $(SCAD_DIR)/%.scad
 	mkdir -p $(STL_DIR)
-	openscad -o $@ $<
+	openscad -o $@ -D '$$fa=1' -D '$$fs=0.5' $<
 
 clean:
 	rm -f ${STL_DIR}/*.stl
