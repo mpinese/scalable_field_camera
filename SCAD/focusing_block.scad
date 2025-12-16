@@ -90,9 +90,6 @@ vScrewHole3_offsetZ = 0;
             cube([vFocusingBlock_l, vFocusingBlock_w, vFocusingBlock_h]);
          translate([vFrontWallExtension_offsetX, vFrontWallExtension_offsetY, vFrontWallExtension_offsetZ])
             cube([vFrontWallExtension_l, vFrontWallExtension_w, vFrontWallExtension_h]);
-     // Fill in over a screw hole
-     translate([vScrewHole3_offsetX, vScrewHole3_offsetY, vScrewHole3_offsetZ])
-        cylinder(d=vInsertM3Hole_d+2, h=vInsertM3MinDepth_h+3);
             
          }
      // front edge cutout
