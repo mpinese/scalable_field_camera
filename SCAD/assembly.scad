@@ -38,16 +38,15 @@ col_flexible="red";
  * Fix lid countersinks
  * Fix top lensboard mount hole blowout
  * Fix lid-body closing guide pin sizing
- * Add movement markers
- * Consider slightly enlarging body (deeper) to simplify closing.
- * Bugfix closing issue where front standard rubs against focus wheel.
+ * Bugfix closing issue where front standard tilt plate rubs against focus wheel.
  * Add M5 insert for storage of tripod_plate screw while packed
 
  * Lead screw nut needs to be designed by object, as no design available.
 
  * Harmonise fasteners to simplify BOM
- * Consider moving to MGN7 instead of the dovetail
  
+ * Consider: add movement markers
+ * Consider: slightly enlarge body (deeper) to simplify closing.
 */
 
 /* Additional parts for BOM:
@@ -127,7 +126,7 @@ union() {
     translate([0, 0, 37]) rotate([180, 0, 0]) screw_m5_cs(16);
     
     // Leadscrew nut
-    translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
+    translate([-53, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
     
     translate([0, 0, -16]) {
         color(col_structural) translate([0, -65, 62]) rotate([0, 270, 270]) front_standard_tilt_plate();
