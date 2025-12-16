@@ -10,7 +10,7 @@ module ground_glass_frame() {
 
 // this are raw measurements - we will derive the final measurements for our model from them
 
-vGG_thickness = 2;
+vGG_thickness = 1.7;
 vGG_plane_offset = vGroundGlass_offsetZ;
 vCassetteLowerBorder = vFilmWindow_offsetX; // Distance from lower border to window frame
 vHolder_height = 2;
@@ -65,7 +65,7 @@ vGGClampCutout_offsetY = -(vGGClampCutout_w/2);
 vGGClampCutout_offsetZ = vGG_plane_offset+vGG_thickness;
 
 vGGClampHole_d = vInsertM2Hole_d;
-vGGClampHole_h = vInsertM2MinDepth_h;
+vGGClampHole_h = vInsertM2MinDepth_h+0.5;
 assert(vGGFrame_h >= vGGClampHole_h);
 vGGClampHole_offsetX1 = -(vGGFrameCutout_l/2) - (vGGClampCutout_l/2);
 vGGClampHole_offsetX2 = (vGGFrameCutout_l/2) + (vGGClampCutout_l/2);
@@ -124,13 +124,13 @@ union(){
             cube([vGGClampCutout_l, vGGClampCutout_w, vGGClampCutout_h]);
         
         // GG clamp holes
-        translate([vGGClampHole_offsetX1, vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX1, vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX1, -vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX1, -vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX2, vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX2, vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX2, -vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX2, -vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
         
         // GG holder hole

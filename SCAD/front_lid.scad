@@ -61,7 +61,7 @@ vRailMidCutout_offsetY = -vRailMidCutout_w/2;
 vRailMidCutout_offsetZ = vFrontLid_wall-vRailMidCutout_h;
 
 // hinges
-vHingeTolerance = vTolerance;
+vHingeTolerance = 0.3;
 vHingeTubeOuter_r = vFrontLid_wall;
 vHingeTubeOuter_h = vFrontLidOuter_w;
 vHingeTubeInner_d = vHingeHole+vHingeTolerance;

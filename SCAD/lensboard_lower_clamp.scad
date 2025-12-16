@@ -20,7 +20,7 @@ vClampCutout_offsetX = 10;
 vClampCutout_offsetY = -vClampCutout_w/2;
 vClampCutout_offsetZ = 0;
 
-vScrewHole_d = 3;
+vScrewHole_d = 3.5;
 vScrewHole_h = vClampBase_h;
 vScrewHole_offsetX = 5;
 vScrewHole_offsetY = 25;

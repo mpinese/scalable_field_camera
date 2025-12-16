@@ -90,9 +90,10 @@ vBellowsScrew_offsetY = -(vBodyOuter_w/2);
 vBellowsScrew_offsetZ = vBellowsFrameCutout_offsetZ+vBellowsBackFrameInner_h+vBellowsBackFrameScrewHole_offsetZ;
 
 // hinges
+vHingeTolerance = 0.3;
 vHingeOuter_d = 2*vWall_strength;
 vHingeOuter_h = vHingeBaseWidth-vTolerance;
-vHingeInner_d = vHingeHole+vTolerance;
+vHingeInner_d = vHingeHole+vHingeTolerance;
 vHingeInner_h = vHingeOuter_h;
 vHinge_offsetX = vSideWall_offsetX;
 vHinge_offsetY = (vHingeInnerDistance+vTolerance)/2;

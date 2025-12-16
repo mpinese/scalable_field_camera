@@ -8,7 +8,7 @@ module locking_rail() {
 vTolerance = 0.2;
 
 
-vLockingRailBaseRadius_r = 5;
+vLockingRailBaseRadius_r = 4.5;
 vLockingRailBaseRadius_offsetX1 = vLockingRailBaseRadius_r;
 vLockingRailBaseRadius_offsetX2 = vLockingRailBaseRadius_r+10;
 vLockingRailBaseRadius_offsetY= vLockingRailBaseRadius_r;

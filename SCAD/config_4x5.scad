@@ -131,7 +131,7 @@ vLeverPlateBase_w = vUpperRail_w - (8*vDoveTail_w);
 vLeverPlateBlock_w = 25;
 vLeverPlateBlock_l = vSliderBase_l-(2*vDoveTail_w);
 
-vFrontStandard_h = 130;
+vFrontStandard_h = 126;
 vFrontStandardSlot_h = vFrontStandard_h - 30;
 
 // lensboard carrier

@@ -7,7 +7,7 @@ module lensboard_upper_clamp() {
 
 // variables
 
-vClampBase_l = 15;
+vClampBase_l = 14;
 vClampBase_w = 65;
 vClampBase_h = 3;
 vClampBase_offsetX = 0;

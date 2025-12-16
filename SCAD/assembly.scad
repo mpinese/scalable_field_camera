@@ -23,6 +23,7 @@ use <tripod_plate.scad>;
 use <lensboard.scad>;
 use <handle_strap.scad>;
 use <handle_strap_cover.scad>;
+use <thumbscrews.scad>;
 use <modules.scad>;
 
 include <baseconfig.scad>;
@@ -32,15 +33,19 @@ col_general="LightGray";
 col_structural="#404040";
 col_flexible="red";
 
-
 /* TODO list    
 
- * Handle
+ * Fix lid countersinks
+ * Fix top lensboard mount hole blowout
+ * Fix lid-body closing guide pin sizing
+ * Add movement markers
+ * Consider slightly enlarging body (deeper) to simplify closing.
+ * Bugfix closing issue where front standard rubs against focus wheel.
+ * Add M5 insert for storage of tripod_plate screw while packed
 
  * Lead screw nut needs to be designed by object, as no design available.
 
- * Consider replacing all M2s with M3s, to simplify BOM
- * Scale for bellows extension?
+ * Harmonise fasteners to simplify BOM
  * Consider moving to MGN7 instead of the dovetail
  
 */
@@ -52,9 +57,9 @@ col_flexible="red";
 - about 100mm of 0.75mm spring steel wire for the pulling lever mechanism    
 */
 
+translate([164.5, 0, -97]) {    // Translate so x axis is optical axis, with film centre at [0, 0, 0]
 
-
-difference() {
+difference() {  // Difference for sections (defined at the bottom)
 union() {
     color(col_structural) translate([-152.5, 0, 100]) rotate([180, -90, 0]) body();
     color(col_structural) translate([0, 0, 0]) rotate([0, 0, 0]) front_lid();
@@ -73,11 +78,11 @@ union() {
     color("darkred") translate([-133, 0, 100]) multmatrix([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
-        [0.09, 0, 1, 0],
+        [-0.03, 0, 1, 0],
         [0, 0, 0, 1]])
     rotate([0, 90, 0]) rotate([0, 0, 45]) difference() {
-        cylinder(h = 125, d1=145*sqrt(2), d2=96*sqrt(2), $fn=4);
-        cylinder(h = 125, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
+        cylinder(h = 140, d1=145*sqrt(2), d2=96*sqrt(2), $fn=4);
+        cylinder(h = 140, d1=145*sqrt(2)-0.5, d2=96*sqrt(2)-0.5, $fn=4);
     }
     
     color(col_flexible) translate([-120, -85, 100]) rotate([90, 90, 0]) handle_strap();
@@ -94,28 +99,125 @@ union() {
     translate([-120, -85, 100 + vStrapHoleDelta + vHandleStrapCoverExtra_l + vStrapHoleSpacing]) rotate([-90, 0, 0]) insert_m3();
     translate([-120, -85, 100 - vStrapHoleDelta - vHandleStrapCoverExtra_l - vStrapHoleSpacing]) rotate([-90, 0, 0]) insert_m3();
     
-    color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
+    color(col_structural) translate([-50, 0, 5]) rotate([0, 0, 0]) rails();
 
+    translate([14, 0, 0]) {
     color(col_structural) translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
     color(col_structural) translate([0, 0, 27]) rotate([0, 180, 180]) slider();
-    color(col_structural) translate([-50, 0, 5]) rotate([0, 0, 0]) rails();
-    color(col_structural) translate([0, -65, 62]) rotate([0, 270, 270]) front_standard_tilt_plate();
-    color(col_structural) translate([0, 65, 62]) rotate([0, 270, 90]) front_standard_tilt_plate();
-
-    color(col_structural) translate([-8.5, 0, 112]) rotate([0, 90, 0]) lensboard_carrier();
-    color(col_controls) translate([7.5, 0, 173.5]) rotate([0, 90, 0]) lensboard_upper_clamp();
-    color(col_controls) translate([10.5, 0, 54.5]) rotate([0, 270, 0]) lensboard_lower_clamp();
-
-    color(col_structural) translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
-
-    color(col_general) translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
-    color(col_general) translate([-8, 0, 112]) rotate([0, 90, 0]) bellows_front_frame();
-
-    color(col_structural) translate([-25, 0, 0]) rotate([180, 0, 0]) front_lid_dovetail();
 
     color(col_structural) translate([-10, 0, 16]) rotate([0, 0, 0]) pulling_lever_plate();
     color(col_controls) translate([-10, -25, 18]) rotate([0, 0, 0]) pulling_lever();
     color(col_controls) translate([-10, 25, 18]) rotate([0, 0, 0]) scale([1, -1, 1]) pulling_lever();
+
+    // for pulling_lever_plate front swing screw
+    color(col_controls) translate([0, 0, 37]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
+
+    // pulling_lever_plate screws
+    translate([-15, -7.5, 16]) screw_m3_cs(10);
+    translate([-15, 7.5, 16]) screw_m3_cs(10);
+    translate([-10, -25, 16]) screw_m3_cs(10);
+    translate([-10, 25, 16]) screw_m3_cs(10);
+    translate([5, -7.5, 16]) screw_m3_cs(10);
+    translate([5, 7.5, 16]) screw_m3_cs(10);
+    
+    // pulling_lever_plate hex nut, M5
+    translate([0, 0, 19]) nut_m5();
+    
+    // pulling_lever_plate front swing screw, M5x16
+    translate([0, 0, 37]) rotate([180, 0, 0]) screw_m5_cs(16);
+    
+    // Leadscrew nut
+    translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
+    
+    translate([0, 0, -16]) {
+        color(col_structural) translate([0, -65, 62]) rotate([0, 270, 270]) front_standard_tilt_plate();
+        color(col_structural) translate([0, 65, 62]) rotate([0, 270, 90]) front_standard_tilt_plate();
+        color(col_structural) translate([-8.5, 0, 112]) rotate([0, 90, 0]) lensboard_carrier();
+        color(col_controls) translate([7.5, 0, 173.5]) rotate([0, 90, 0]) lensboard_upper_clamp();
+        color(col_controls) translate([10.5, 0, 54.5]) rotate([0, 270, 0]) lensboard_lower_clamp();
+        color(col_general) translate([-8, 0, 112]) rotate([0, 90, 0]) bellows_front_frame();
+
+        color(col_structural) translate([5, 0, 113]) rotate([0, 90, 0]) lensboard();
+
+        // front_standard_tilt_plate bolts
+        color(col_controls) translate([0, -78, 112]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+        color(col_controls) translate([0, 78, 112]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
+        color(col_controls) translate([0, -79, 170]) rotate([-90, 0, 0]) shift_thumbscrew();
+        color(col_controls) translate([0, 79, 170]) rotate([90, 0, 0]) shift_thumbscrew();
+
+        // lensboard_upper_clamp screws
+        translate([12, -25, 167.5]) rotate([0, -90, 0]) screw_m3_bh(8);
+        translate([12, 25, 167.5]) rotate([0, -90, 0]) screw_m3_bh(8);
+        
+        // lensboard_lower_clamp screws
+        translate([12, -25, 59.5]) rotate([0, -90, 0]) screw_m3_bh(8);
+        translate([12, 25, 59.5]) rotate([0, -90, 0]) screw_m3_bh(8);
+        
+        // lensboard_carrier inserts
+        translate([7.5, -25, 167.5]) rotate([0, -90, 0]) insert_m3();
+        translate([7.5, 25, 167.5]) rotate([0, -90, 0]) insert_m3();
+        translate([7.5, -25, 59.5]) rotate([0, -90, 0]) insert_m3();
+        translate([7.5, 25, 59.5]) rotate([0, -90, 0]) insert_m3();
+        translate([-0.5, -55, 170]) rotate([90, 0, 0]) insert_m5();
+        translate([-0.5, 55, 170]) rotate([-90, 0, 0]) insert_m5();
+        
+        // lensboard_carrier screws
+        translate([-5, -40, 54]) screw_m3_cs(10);
+        translate([-5, 40, 54]) screw_m3_cs(10);
+        translate([-5, -40, 170]) rotate([0, 180, 0]) screw_m3_cs(10);
+        translate([-5, 40, 170]) rotate([0, 180, 0]) screw_m3_cs(10);
+
+        translate([-5, 55, 72]) rotate([90, 0, 0]) screw_m3_cs(6);
+        translate([-5, -55, 72]) rotate([-90, 0, 0]) screw_m3_cs(6);
+        translate([-5, 55, 152]) rotate([90, 0, 0]) screw_m3_cs(6);
+        translate([-5, -55, 152]) rotate([-90, 0, 0]) screw_m3_cs(6);
+
+        // front_standard_tilt_plate inserts
+        translate([0, 69.75, 112]) rotate([90, 0, 0]) insert_m5();
+        translate([0, -69.75, 112]) rotate([-90, 0, 0]) insert_m5();
+        
+        // front_standard_tilt_plate bolts
+        translate([0, -77.5, 112]) rotate([-90, 0, 0]) screw_m5_cs(20);
+        translate([0, 77.5, 112]) rotate([90, 0, 0]) screw_m5_cs(20);
+        translate([0, -72.5, 170]) rotate([-90, 0, 0]) screw_m5_cs(20);
+        translate([0, 72.5, 170]) rotate([90, 0, 0]) screw_m5_cs(20);
+        
+        // bellows_front_frame inserts
+        translate([-5, -40, 60]) insert_m3();
+        translate([-5, 40, 60]) insert_m3();
+        translate([-5, -40, 160]) insert_m3();
+        translate([-5, 40, 160]) insert_m3();
+        translate([-5, -48, 72]) rotate([90, 0, 0]) insert_m3();
+        translate([-5, 48, 72]) rotate([-90, 0, 0]) insert_m3();
+        translate([-5, -48, 152]) rotate([90, 0, 0]) insert_m3();
+        translate([-5, 48, 152]) rotate([-90, 0, 0]) insert_m3();
+
+        translate([-5, -22, 60]) insert_m3();
+        translate([-5, 22, 60]) insert_m3();
+        translate([-5, -22, 160]) insert_m3();
+        translate([-5, 22, 160]) insert_m3();
+        translate([-5, -48, 90]) rotate([90, 0, 0]) insert_m3();
+        translate([-5, 48, 90]) rotate([-90, 0, 0]) insert_m3();
+        translate([-5, -48, 134]) rotate([90, 0, 0]) insert_m3();
+        translate([-5, 48, 134]) rotate([-90, 0, 0]) insert_m3();
+
+        // bellows_front_frame screws
+        translate([-4.5, -22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
+        translate([-4.5, 22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
+        translate([-4.5, -22, 60]) screw_m3_grub(5);
+        translate([-4.5, 22, 60]) screw_m3_grub(5);
+        translate([-4.5, 51, 90]) rotate([90, 0, 0]) screw_m3_grub(5);
+        translate([-4.5, 51, 134]) rotate([90, 0, 0]) screw_m3_grub(5);
+        translate([-4.5, -51, 90]) rotate([-90, 0, 0]) screw_m3_grub(5);
+        translate([-4.5, -51, 134]) rotate([-90, 0, 0]) screw_m3_grub(5);
+    }
+    }
+    
+    color(col_structural) translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
+
+    color(col_general) translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
+
+    color(col_structural) translate([-25, 0, 0]) rotate([180, 0, 0]) front_lid_dovetail();
 
     color(col_controls) translate([-156.5, -85, 190]) rotate([0, 90, 0]) locking_lever();
     color(col_controls) translate([-152.5, 85, 190]) rotate([180, 90, 0]) locking_lever();
@@ -135,25 +237,13 @@ union() {
     color("orange") translate([81.25, -68, 10]) rotate([0, 90, 0]) springwasher_m6();
     color("red") translate([81.75, -68, 10]) rotate([0, 90, 0]) washer_m6();
     color("red") translate([62.5, -68, 10]) rotate([0, 90, 0]) washer_m6();
-    
-    // front_standard_tilt_plate bolts
-    color(col_controls) translate([0, -78, 112]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([0, 78, 112]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([0, -73, 170]) rotate([-90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    color(col_controls) translate([0, 73, 170]) rotate([90, 0, 0]) thumbscrew_m5(screw_d=18, screw_h=8, n_knurls=12, knurl_d=3, knurl_f=0.6);
-    
-    // for pulling_lever_plate front swing screw
-    color(col_controls) translate([0, 0, 37]) rotate([180, 0, 0]) thumbscrew_m5(screw_d=22, screw_h=5, n_knurls=16, knurl_d=3, knurl_f=0.6);
-    
+        
     // for screw into tripod_plate
     color(col_controls) translate([-142.5, 0, -13.5]) rotate([0, 0, 0]) thumbscrew_m5(screw_d=20, screw_h=4.5, n_knurls=16, knurl_d=3, knurl_f=0.6);
 
     // Leadscrew, (T6, 2 or 4mm lead, 150mm)
     translate([-62, -68, 11]) rotate([90, 0, 90]) t6_lead_screw(150);
-        
-    // Leadscrew nut
-    translate([-39, -68, 11]) rotate([90, 0, 90]) t6_lead_screw_nut();
-    
+           
     // Hinge (M4 smooth rod, 160mm, carbon fibre or steel)
     translate([-87.5, 80, 10]) rotate([90, 0, 0]) smooth_rod_m4(160);
     
@@ -258,19 +348,6 @@ union() {
     translate([-172.5, -15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
     translate([-172.5, 15, 165.5]) rotate([0, 90, 0]) screw_m2_bh(8);
     
-    // pulling_lever_plate screws
-    translate([-15, -7.5, 16]) screw_m3_cs(10);
-    translate([-15, 7.5, 16]) screw_m3_cs(10);
-    translate([-10, -25, 16]) screw_m3_cs(10);
-    translate([-10, 25, 16]) screw_m3_cs(10);
-    translate([5, -7.5, 16]) screw_m3_cs(10);
-    translate([5, 7.5, 16]) screw_m3_cs(10);
-    
-    // pulling_lever_plate hex nut, M5
-    translate([0, 0, 19]) nut_m5();
-    
-    // pulling_lever_plate front swing screw, M5x16
-    translate([0, 0, 37]) rotate([180, 0, 0]) screw_m5_cs(16);
     
     // slider inserts
     translate([-15, -7.5, 22]) insert_m3();
@@ -278,76 +355,11 @@ union() {
     translate([-10, -25, 23]) insert_m3();
     translate([-10, 25, 23]) insert_m3();
     translate([5, -7.5, 22]) insert_m3();
-    translate([5, 7.5, 22]) insert_m3();
-    
-    // lensboard_upper_clamp screws
-    translate([12, -25, 167.5]) rotate([0, -90, 0]) screw_m3_bh(8);
-    translate([12, 25, 167.5]) rotate([0, -90, 0]) screw_m3_bh(8);
-    
-    // lensboard_lower_clamp screws
-    translate([12, -25, 59.5]) rotate([0, -90, 0]) screw_m3_bh(8);
-    translate([12, 25, 59.5]) rotate([0, -90, 0]) screw_m3_bh(8);
-    
-    // lensboard_carrier inserts
-    translate([7.5, -25, 167.5]) rotate([0, -90, 0]) insert_m3();
-    translate([7.5, 25, 167.5]) rotate([0, -90, 0]) insert_m3();
-    translate([7.5, -25, 59.5]) rotate([0, -90, 0]) insert_m3();
-    translate([7.5, 25, 59.5]) rotate([0, -90, 0]) insert_m3();
-    translate([-0.5, -55, 170]) rotate([90, 0, 0]) insert_m5();
-    translate([-0.5, 55, 170]) rotate([-90, 0, 0]) insert_m5();
-    
-    // lensboard_carrier screws
-    translate([-5, -40, 54]) screw_m3_cs(10);
-    translate([-5, 40, 54]) screw_m3_cs(10);
-    translate([-5, -40, 170]) rotate([0, 180, 0]) screw_m3_cs(10);
-    translate([-5, 40, 170]) rotate([0, 180, 0]) screw_m3_cs(10);
-
-    translate([-5, 55, 72]) rotate([90, 0, 0]) screw_m3_cs(6);
-    translate([-5, -55, 72]) rotate([-90, 0, 0]) screw_m3_cs(6);
-    translate([-5, 55, 152]) rotate([90, 0, 0]) screw_m3_cs(6);
-    translate([-5, -55, 152]) rotate([-90, 0, 0]) screw_m3_cs(6);
-    
-    // front_standard_tilt_plate inserts
-    translate([0, 69.75, 112]) rotate([90, 0, 0]) insert_m5();
-    translate([0, -69.75, 112]) rotate([-90, 0, 0]) insert_m5();
-    
-    // front_standard_tilt_plate bolts
-    translate([0, -77.5, 112]) rotate([-90, 0, 0]) screw_m5_cs(20);
-    translate([0, 77.5, 112]) rotate([90, 0, 0]) screw_m5_cs(20);
-    translate([0, -72.5, 170]) rotate([-90, 0, 0]) screw_m5_cs(20);
-    translate([0, 72.5, 170]) rotate([90, 0, 0]) screw_m5_cs(20);
-    
-    // bellows_front_frame inserts
-    translate([-5, -40, 60]) insert_m3();
-    translate([-5, 40, 60]) insert_m3();
-    translate([-5, -40, 160]) insert_m3();
-    translate([-5, 40, 160]) insert_m3();
-    translate([-5, -48, 72]) rotate([90, 0, 0]) insert_m3();
-    translate([-5, 48, 72]) rotate([-90, 0, 0]) insert_m3();
-    translate([-5, -48, 152]) rotate([90, 0, 0]) insert_m3();
-    translate([-5, 48, 152]) rotate([-90, 0, 0]) insert_m3();
-
-    translate([-5, -22, 60]) insert_m3();
-    translate([-5, 22, 60]) insert_m3();
-    translate([-5, -22, 160]) insert_m3();
-    translate([-5, 22, 160]) insert_m3();
-    translate([-5, -48, 90]) rotate([90, 0, 0]) insert_m3();
-    translate([-5, 48, 90]) rotate([-90, 0, 0]) insert_m3();
-    translate([-5, -48, 134]) rotate([90, 0, 0]) insert_m3();
-    translate([-5, 48, 134]) rotate([-90, 0, 0]) insert_m3();
-
-    // bellows_front_frame screws
-    translate([-4.5, -22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
-    translate([-4.5, 22, 164]) rotate([180, 0, 0]) screw_m3_grub(5);
-    translate([-4.5, -22, 60]) screw_m3_grub(5);
-    translate([-4.5, 22, 60]) screw_m3_grub(5);
-    translate([-4.5, 51, 90]) rotate([90, 0, 0]) screw_m3_grub(5);
-    translate([-4.5, 51, 134]) rotate([90, 0, 0]) screw_m3_grub(5);
-    translate([-4.5, -51, 90]) rotate([-90, 0, 0]) screw_m3_grub(5);
-    translate([-4.5, -51, 134]) rotate([-90, 0, 0]) screw_m3_grub(5);
+    translate([5, 7.5, 22]) insert_m3();       
 }
 // Vertical section
 *translate([0, -5000, -5000]) cube([1000, 10000, 10000]);
 // Horizontal section
-*translate([-5000, -5000, 100]) cube([10000, 10000, 10000]);
+*translate([-5000, -5000, 20]) cube([10000, 10000, 10000]);
+}
 }
