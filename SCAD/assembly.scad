@@ -101,7 +101,7 @@ union() {
     color(col_structural) translate([-50, 0, 5]) rotate([0, 0, 0]) rails();
 
     translate([14, 0, 0]) {
-    color(col_structural) translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
+    #color(col_structural) translate([0, 0, 22]) rotate([0, 0, 0]) front_standard();
     color(col_structural) translate([0, 0, 27]) rotate([0, 180, 180]) slider();
 
     color(col_structural) translate([-10, 0, 16]) rotate([0, 0, 0]) pulling_lever_plate();
