@@ -254,6 +254,10 @@ difference(){
     translate([-vEdgeBolt_offsetX, -vEdgeBolt_offsetY, vEdgeBoltCone_offsetZ])
         cylinder(d1=vEdgeBoltCone_d1, d2=vEdgeBoltCone_d2, h=vEdgeBoltCone_h);
     
+    
+    // Receptacle for locking bolt
+    // TODO: This is hard-coded for 4x5 -- see what it would take to make it general
+    translate([-82, 0, 0]) cylinder(d=vInsertM5Size_d, h=vInsertM5Depth_h+0.5);
 };
 
 

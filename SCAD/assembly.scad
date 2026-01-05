@@ -38,8 +38,6 @@ col_flexible="red";
  * Fix lid countersinks
  * Fix top lensboard mount hole blowout
  * Fix lid-body closing guide pin sizing
- * Bugfix closing issue where front standard tilt plate rubs against focus wheel.
- * Add M5 insert for storage of tripod_plate screw while packed
 
  * Lead screw nut needs to be designed by object, as no design available.
 
@@ -220,7 +218,8 @@ union() {
     }
     }
     
-    color(col_structural) translate([-17, 0, -2]) rotate([0, 180, 0]) tripod_plate();
+    color(col_structural) translate([-17+60, 0, -2]) rotate([0, 180, 0]) tripod_plate();
+    translate([-82, 0, 5]) rotate([0, 180, 0]) insert_m5();
 
     color(col_general) translate([-133, 0, 100]) rotate([0, 270, 0]) bellows_back_frame();
 

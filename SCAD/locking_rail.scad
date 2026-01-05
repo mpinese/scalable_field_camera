@@ -1,6 +1,8 @@
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+$fn=50;
+
 module locking_rail() {
 
 // variables
@@ -69,6 +71,8 @@ difference(){
     translate([vLockingRailBaseRadius_offsetX2, vLockingRailBaseRadius_offsetY, vLockingRailBaseRadius_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);
 
+    // Cutout for clearance in portrait mode
+    translate([12,7,0]) cube([8,2,4]);
 };
 
 };
