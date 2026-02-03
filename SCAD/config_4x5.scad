@@ -2,6 +2,7 @@
 This is the base configuration file for the 4x5" format
 # we are not using the exact ANSI measures, but slightly rounded measures for slight simplification
 */
+vStabilizerTotal_h = 7;
 
 // general tolerance
 vTolerance = 0.2;
@@ -52,8 +53,8 @@ vBellowsBackLightTrapOuter_l = vBellowsBackFrameInner_l+2*2;
 vBellowsBackLightTrapOuter_w = vBellowsBackLightTrapOuter_l;
 vBellowsBackLightTrap_h = 3;
 
-vBellowsBackFrameScrewHole_d = 2;
-vBellowsBackFrameScrewHole_h = 10;
+//vBellowsBackFrameScrewHole_d = 2;
+//vBellowsBackFrameScrewHole_h = 10;
 vBellowsBackFrameScrewHole_offsetXY = 70;
 vBellowsBackFrameScrewHole_offsetZ = vBellowsBackFrameOuter_h/2;
 
@@ -74,8 +75,8 @@ vBellowsFrontLightTrapOuter_l = vBellowsFrontFrameInner_l+2*2;
 vBellowsFrontLightTrapOuter_w = vBellowsFrontLightTrapOuter_l;
 vBellowsFrontLightTrap_h = 0;
 
-vBellowsFrontFrameScrewHole_d = 2;
-vBellowsFrontFrameScrewHole_h = 10;
+//vBellowsFrontFrameScrewHole_d = 2;
+//vBellowsFrontFrameScrewHole_h = 10;
 vBellowsFrontFrameScrewHole_offsetXY = 40;
 vBellowsFrontFrameScrewHole_offsetZ = vBellowsFrontFrameOuter_h/2;
 
@@ -97,7 +98,7 @@ vBackPlateStrength = vWall_strength;
 // hinges for front lid
 vHingeInnerDistance = 100;
 vHingeBaseWidth = 20;
-vHingeHole = 5;
+vHingeHole = 4;
 
 // lid lock measures
 vLidLockBase_d = 8;
@@ -130,7 +131,7 @@ vLeverPlateBase_w = vUpperRail_w - (8*vDoveTail_w);
 vLeverPlateBlock_w = 25;
 vLeverPlateBlock_l = vSliderBase_l-(2*vDoveTail_w);
 
-vFrontStandard_h = 130;
+vFrontStandard_h = 126;
 vFrontStandardSlot_h = vFrontStandard_h - 30;
 
 // lensboard carrier
@@ -155,8 +156,8 @@ vAxisHole_h = vDoveTail_w+vTolerance;
 
 vTiltLockBolt_d = 12;
 vTiltLockBolt_h = 14;
-vTiltLockBoltHole_d = 8;
-vTiltLockBoltHole_h = vTiltLockBolt_h;
+//vTiltLockBoltHole_d = 8;
+//vTiltLockBoltHole_h = vTiltLockBolt_h;
 
 vTiltHeight = 50;
 vTiltRadius = vFrontPlate_length/2;
@@ -170,12 +171,12 @@ vFocusingKnob_d = 25;
 vFocusingKnob_h = 20;
 
 // stabilizer measures (just the outer measures of our stabilizer block, not the tripod slider)
-vStabilizerBase_l = 140;
-vStabilizerBase_w = 100;  
+vStabilizerBase_l = 135;
+vStabilizerBase_w = 90;  
 vStabilizerBase_h = 7;
 vStabilizerDovetailBase_w = 50;
 // screw holes for the stabilizer
-vLidHoleCount_x = 5;
+vLidHoleCount_x = 4;
 vLidHoleDist_x = 35;
 vLidHoleCount_y = 2;
 vLidHoleDist_y = 60;
@@ -188,4 +189,40 @@ vScrew2Hole_d = 2;
 vScrew2ThreadHole_d = 1.4;
 
 
- 
+// Dimensions for small heat set insert holes.
+// Sized for M2 inserts, 3 mm depth, 3.5 mm max OD
+// (may be labelled M2x3.5x3)
+vInsertM2Hole_d = 3.2;
+vInsertM2MinDepth_h = 4.0;
+vInsertM2Size_d = 3.5;
+vInsertM2Depth_h = 3.0;
+
+// Dimensions for heat set insert holes.
+// Sized for "Voron standard" M3 inserts, 4 mm depth, 5 mm max OD
+// (variously labelled M3x4x5 or M3x5x4)
+vInsertM3Hole_d = 4.7;
+vInsertM3MinDepth_h = 5.0;
+vInsertM3Size_d = 5.0;
+vInsertM3Depth_h = 4.0;
+
+// Dimensions for large heat set insert holes.
+// Sized for M5 inserts, 5 mm depth, 7 mm max OD
+// (may be labelled M5x7x5)
+vInsertM5Hole_d = 6.7;
+vInsertM5MinDepth_h = 6.0;
+vInsertM5Size_d = 7.0;
+vInsertM5Depth_h = 5.0;
+
+
+// Handle strap
+vHandleStrap_h = 2.0;       // Thickness of the strap in mm
+vHandleStrap_w = 15.0;      // Width of the strap in mm
+vHandleStrap_l = 145.0;     // Total length of the strap in mm
+vHandleStrapMovement_l = 35.0;   // Total amount the strap moves, in mm. Each side moves half this amount.
+vHandleStrapCutout_w = 4.0;      // Width of the central cutout, in mm
+vHandleStrapSlotOffsetFar = vHandleStrap_l/2 - vHandleStrap_w/2;
+vHandleStrapSlotOffsetNear = vHandleStrapSlotOffsetFar - vHandleStrapMovement_l/2;
+vHandleStrapCoverExtra_l = 5.0;
+vHandleStrapHoleSize_d = 3.0;
+vStrapHoleDelta = vHandleStrapSlotOffsetNear-vHandleStrapCoverExtra_l+vHandleStrapHoleSize_d/2;
+vStrapHoleSpacing = vHandleStrapMovement_l/2 + vHandleStrap_w/2;

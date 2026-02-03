@@ -4,11 +4,13 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module ground_glass_frame() {
+
 // variables
 
 // this are raw measurements - we will derive the final measurements for our model from them
 
-vGG_thickness = 2;
+vGG_thickness = 1.7;
 vGG_plane_offset = vGroundGlass_offsetZ;
 vCassetteLowerBorder = vFilmWindow_offsetX; // Distance from lower border to window frame
 vHolder_height = 2;
@@ -28,7 +30,7 @@ vGGHolder_offsetX = 0;
 vGGHolder_offsetY = -vGGHolder_h/2;
 vGGHolder_offsetZ = vGGHolder_d/2;
 
-vGGHolderHole_d = 2;
+vGGHolderHole_d = vInsertM2Hole_d;
 vGGHolderHole_h = vGGHolder_h;
 vGGHolderHole_offsetX = 0;
 vGGHolderHole_offsetY = -vGGHolder_h/2;
@@ -62,8 +64,9 @@ vGGClampCutout_offsetX2 = (vGGFrameCutout_l/2);
 vGGClampCutout_offsetY = -(vGGClampCutout_w/2);
 vGGClampCutout_offsetZ = vGG_plane_offset+vGG_thickness;
 
-vGGClampHole_d = 2.5;
-vGGClampHole_h = vGGFrame_h;
+vGGClampHole_d = vInsertM2Hole_d;
+vGGClampHole_h = vInsertM2MinDepth_h+0.5;
+assert(vGGFrame_h >= vGGClampHole_h);
 vGGClampHole_offsetX1 = -(vGGFrameCutout_l/2) - (vGGClampCutout_l/2);
 vGGClampHole_offsetX2 = (vGGFrameCutout_l/2) + (vGGClampCutout_l/2);
 vGGClampHole_offsetY = -15;
@@ -121,13 +124,13 @@ union(){
             cube([vGGClampCutout_l, vGGClampCutout_w, vGGClampCutout_h]);
         
         // GG clamp holes
-        translate([vGGClampHole_offsetX1, vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX1, vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX1, -vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX1, -vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX2, vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX2, vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
-        translate([vGGClampHole_offsetX2, -vGGClampHole_offsetY, vGGClampHole_offsetZ])
+        translate([vGGClampHole_offsetX2, -vGGClampHole_offsetY, vGGClampCutout_offsetZ-vGGClampHole_h])
             cylinder(d=vGGClampHole_d, h=vGGClampHole_h);
         
         // GG holder hole
@@ -177,3 +180,6 @@ union(){
     
 };    
      
+};
+
+ground_glass_frame();

@@ -1,16 +1,16 @@
-// some variables
-$fn = 60; // we are using 60 fragments for cylinders and similar objects
-
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+$fn=50;
+
+module locking_rail() {
 
 // variables
 
 vTolerance = 0.2;
 
 
-vLockingRailBaseRadius_r = 5;
+vLockingRailBaseRadius_r = 4.5;
 vLockingRailBaseRadius_offsetX1 = vLockingRailBaseRadius_r;
 vLockingRailBaseRadius_offsetX2 = vLockingRailBaseRadius_r+10;
 vLockingRailBaseRadius_offsetY= vLockingRailBaseRadius_r;
@@ -71,4 +71,12 @@ difference(){
     translate([vLockingRailBaseRadius_offsetX2, vLockingRailBaseRadius_offsetY, vLockingRailBaseRadius_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);
 
+    // Cutout for clearance in portrait mode
+    translate([12,7,0]) cube([8,2,4]);
 };
+
+};
+
+rotate([0, 180, 0]) locking_rail();
+
+translate([0, 100, 0]) rotate([0, 180, 0]) scale([1, -1, 1]) locking_rail();

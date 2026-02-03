@@ -1,14 +1,12 @@
+include <baseconfig.scad>;
+use <modules.scad>;
 
-$fn=60;
+module focus_wheel() {
 
 vFocusWheel_d = 24;
-vFocusWheel_h = 17.2;
+vFocusWheel_h = 17;
 vThread_d = 6.2;
 vThread_h = vFocusWheel_h;
-
-vThreadNut_d = 10.4;
-vThreadNut_h = 10.8;
-vThreadNut_offsetZ = 0;
 
 vEdgecut = 1.5;
 
@@ -27,7 +25,7 @@ vUpperSegment_d2 = vFocusWheel_d - 2*vEdgecut;
 vUpperSegment_h = vEdgecut;
 vUpperSegment_offsetZ = vLowerSegment_h+vMidSegment_h;
 
-vLockingScrewHole_d = 4;
+vLockingScrewHole_d = vInsertM3Hole_d;
 vLockingScrewHole_h = vFocusWheel_d;
 vLockingScrewHole_offsetX = -vFocusWheel_d/2;
 vLockingScrewHole_offsetZ = vFocusWheel_h-11;
@@ -107,30 +105,25 @@ difference(){
     // thread hole
     cylinder(d=vThread_d, h=vThread_h);
     
-    // thread nut hole
-    translate([0, 0, vThreadNut_offsetZ])
-        cylinder(d=vThreadNut_d, h=vThreadNut_h);
-    
    
-    
     // locking screw hole
     translate([vLockingScrewHole_offsetX, 0, vLockingScrewHole_offsetZ])
         rotate([0,90, 0])
             cylinder(d=vLockingScrewHole_d, h=vLockingScrewHole_h);
     
     
-    for (i=[0:5]){
+    for (i=[0:11]){
     rotate([0, 0, i*30])    
         union(){
         translate([vCutout_offsetX, vCutout_offsetY, vCutout_offsetZ])
             rotate([0, 270, 0])
                 roof(vCutout_l, vCutout_w, vCutout_h);
-
-        translate([-vCutout_offsetX, vCutout_offsetY, vCutout_offsetZ])
-            rotate([0, 270, 0])
-                roof(vCutout_l, vCutout_w, -vCutout_h);
         };
     };
     
 
 };
+
+};
+
+focus_wheel();

@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module front_standard() {
 
 // base plate
 vFrontStandartBasePlate_d1 = vSliderBase_w; // maybe add tolerance here?
@@ -56,7 +57,7 @@ vUprightLeft_offsetY = vFrontStandartTiltPlate_width/2;
 vUprightRight_offsetY = -(vFrontStandartTiltPlate_width/2)-vUpright_width;
 vUprightSlotCutout_offsetX = -vUprightSlotCutout_length/2;
 vUprightSlotCutout_offsetY = -vUprightSlotCutout_width/2;
-vUprightSlotCutout_offsetZ = 25;
+vUprightSlotCutout_offsetZ = 24;
 
 vPullingLeverCutout_length = vDoveTail_w;
 vPullingLeverCutout_width = vUpperRail_w;
@@ -124,5 +125,11 @@ difference(){
         rotate([0, 0, 0])
             wedge(vEdgeCutoff_l, -vEdgeCutoff_h, vEdgeCutoff_w);
 
+    // Chamfer the top edges
+    translate([vUpright_length/3, -vUprightLeft_offsetY*1.5, vUpright_height]) rotate([0, 45, 0]) cube([vUpright_length, 2*vUprightLeft_offsetY*1.5, vUpright_length]);
+    translate([-sqrt(2)*vUpright_length-vUpright_length/3, -vUprightLeft_offsetY*1.5, vUpright_height]) rotate([0, 45, 0]) cube([vUpright_length, 2*vUprightLeft_offsetY*1.5, vUpright_length]);
+};
 
 };
+
+rotate([0, -90, 0]) front_standard();

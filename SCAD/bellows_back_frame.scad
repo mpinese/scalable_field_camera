@@ -4,7 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
-
+module bellows_back_frame() {
 
 // we are centering our cube
 vLowerCube_l = vBellowsBackFrameOuter_l;
@@ -50,8 +50,8 @@ vSplitCutoutInner_offsetX = -vSplitCutoutInner_l/2;
 vSplitCutoutInner_offsetY = -vSplitCutoutInner_w/2;
 vSplitCutoutInner_offsetZ = 0.2;
 
-vBellowsScrew_d = 2.5;
-vBellowsScrew_h = 20;
+vBellowsScrew_d = 3.5;      // Sized for M3 grub screws
+vBellowsScrew_h = (vLowerCube_l-vSplitCutoutInner_l)/2 + 1; // The screw holes to fix the bellows don't extend all the way through, but are blind, stopping 1 mm below the bellows. This is to prevent puncturing the bellows with excessive force.
 vBellowsScrew_offsetX = (vLowerCube_l)/2;
 vBellowsScrew_offsetY = (vLowerCube_l)/2-40;
 vBellowsScrew_offsetZ = vLowerCube_h/2;
@@ -59,6 +59,9 @@ vBellowsScrew_offsetZ = vLowerCube_h/2;
 // screw holes for fixing the whole frame in the body
 vBellowsBackFrameScrewHole_offsetX = (vLowerCube_l)/2;
 vBellowsBackFrameScrewHole_offsetY = vBellowsBackFrameScrewHole_offsetXY;
+
+vBellowsBackFrameScrewHole_d=vInsertM3Hole_d;
+vBellowsBackFrameScrewHole_h=max(vInsertM3MinDepth_h, 5.5);  // Small extra allowance for 10mm screw
 
 difference(){
     union(){
@@ -92,35 +95,62 @@ difference(){
         translate([vInnerCutout_offsetX, vInnerCutout_offsetY, vInnerCutout_offsetZ])
             cube([vInnerCutout_l, vInnerCutout_w, vInnerCutout_h]);
         
-    // inner screw holes (countersunk screws)
+    // inner screw holes (grub screws)
     // screws in x/-x direction    
     translate([vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, -90, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, -90, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([-vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, 90, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([-vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
         rotate([0, 90, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     
     // screws in y/-y direction    
     translate([vBellowsScrew_offsetY, vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
         rotate([90, 0, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([vBellowsScrew_offsetY, -vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
         rotate([-90, 0, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([-vBellowsScrew_offsetY, vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
         rotate([90, 0, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
     translate([-vBellowsScrew_offsetY, -vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
         rotate([-90, 0, 0])
-            countersunk_screw(vBellowsScrew_d, vBellowsScrew_h);    
-    
+            cylinder(h=vBellowsScrew_h, d=vBellowsScrew_d);
+          
+    // inner heat-set inserts to thread inner screws
+     translate([vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+        rotate([0, -90, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+        rotate([0, -90, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([-vBellowsScrew_offsetX, vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+        rotate([0, 90, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([-vBellowsScrew_offsetX, -vBellowsScrew_offsetY, vBellowsScrew_offsetZ])
+        rotate([0, 90, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([vBellowsScrew_offsetY, vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
+        rotate([90, 0, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([vBellowsScrew_offsetY, -vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
+        rotate([-90, 0, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([-vBellowsScrew_offsetY, vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
+        rotate([90, 0, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+    translate([-vBellowsScrew_offsetY, -vBellowsScrew_offsetX, vBellowsScrew_offsetZ])
+        rotate([-90, 0, 0])
+            cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h);
+          
+
     // outer screw holes 
     // screws in x/-x direction    
     translate([vBellowsBackFrameScrewHole_offsetX, vBellowsBackFrameScrewHole_offsetY, vBellowsBackFrameScrewHole_offsetZ])
@@ -151,3 +181,7 @@ difference(){
             cylinder(d=vBellowsBackFrameScrewHole_d, h=vBellowsBackFrameScrewHole_h);        
 
 }
+
+};
+
+bellows_back_frame();

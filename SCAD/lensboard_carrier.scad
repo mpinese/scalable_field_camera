@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module lensboard_carrier() {
 
 // some variables
 // $fn = 120; // we are using 120 fragments for cylinders and similar objects
@@ -58,11 +59,11 @@ vBellowsScrewHole_h = vFrontPlate_length;
 vBellowsScrewSinking_d1 = 6;
 vBellowsScrewSinking_h = vBellowsScrewSinking_d1/2;
 vBellowsScrewHole_offsetX = -vFrontPlate_length/2;
-vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2;
+vBellowsScrewHole_offsetY = vBellowsCutoutUpper_length/2-1.25;   // 1.25 is a fudge factor required to get the lensboard_carrier holes to line up with the front_bellows_frame. TODO: figure out why this is needed.
 vBellowsScrewHole_offsetZ = vBellowsCutoutLower_height/2;
 
-vClampHole_d = 2;
-vClampHole_h = 8;
+vClampHole_d = vInsertM3Hole_d;
+vClampHole_h = vInsertM3MinDepth_h+1;   // Add a small offset to enable the use of 8mm screws here
 vClampHole_offsetX1 = vLensBoardCutout_offsetX-4;
 vClampHole_offsetX2 = vLensBoardCutout_offsetX+vLensboard_l+4;
 vClampHole_offsetY = 25;
@@ -160,33 +161,34 @@ translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrew
         cylinder(d=vBellowsScrewHole_d, h=vBellowsScrewHole_h);
 
 // sinkings for the bellows screws
+// TODO: add countersink?
 // vertical
 translate([vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetZ])
     rotate([0, 90, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
 translate([vBellowsScrewHole_offsetX, -vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetZ])
     rotate([0, 90, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
 translate([-vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetZ])
     rotate([0, -90, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
 translate([-vBellowsScrewHole_offsetX, -vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetZ])
     rotate([0, -90, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
 
 // horizontal
-translate([vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+translate([vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX-vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([90, 0, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
+translate([-vBellowsScrewHole_offsetY, -vBellowsScrewHole_offsetX-vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([90, 0, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
+translate([vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX+vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([-90, 0, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
-translate([-vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX, vBellowsScrewHole_offsetZ])
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
+translate([-vBellowsScrewHole_offsetY, vBellowsScrewHole_offsetX+vBellowsScrewSinking_h, vBellowsScrewHole_offsetZ])
     rotate([-90, 0, 0])
-        cylinder(d1=vBellowsScrewSinking_d1, h=vBellowsScrewSinking_h);
+        cylinder(d1=vBellowsScrewSinking_d1, d2=0, h=vBellowsScrewSinking_h);
 
 // axis holes
 translate([vAxisHole_offsetX, vAxisHole_offsetY, vAxisHole_offsetZ])
@@ -198,12 +200,13 @@ translate([vAxisHole_offsetX, -vAxisHole_offsetY, vAxisHole_offsetZ])
         cylinder(d=vAxisHole_d, h=vAxisHole_h);
 
 // tilt lock bolt holes
+assert(vTiltLockBolt_h >= vInsertM5MinDepth_h);
 translate([vTiltLockBolt_offsetX, vTiltLockBolt_offsetY, vTiltLockBolt_offsetZ])
         rotate([-90, 0, 0])
-            cylinder(d=vTiltLockBoltHole_d, h=vTiltLockBoltHole_h);
+            cylinder(d=vInsertM5Hole_d, h=vTiltLockBolt_h);
     translate([vTiltLockBolt_offsetX, -vTiltLockBolt_offsetY, vTiltLockBolt_offsetZ])
         rotate([90, 0, 0])
-            cylinder(d=vTiltLockBoltHole_d, h=vTiltLockBoltHole_h);
+            cylinder(d=vInsertM5Hole_d, h=vTiltLockBolt_h);
 
 
 
@@ -226,3 +229,7 @@ translate([vSwingScrewCutout_offsetX, vSwingScrewCutout_offsetY, vSwingScrewCuto
 
 
 // cylinder(d1=105, d2=85, h=4, $fn=4);
+
+};
+
+lensboard_carrier();

@@ -4,8 +4,10 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module slider() {
+
 // we have some large rounded objects, so we smooth them a bit more with a higher number of fragments
-$fn = 120; 
+//$fn = 120; 
 
 // base plate
 vFrontStandartBasePlate_d1 = vSliderBase_w-vTolerance; // maybe subtract tolerance here?
@@ -44,14 +46,14 @@ vLeverBoltHole_offsetX = -(2*vDoveTail_w);
 vLeverBoltHole_offsetY = (vUpperRail_w-(8*vDoveTail_w)) / 2;
 vLeverBoltHole_offsetZ = vFrontStandartBasePlate_h1-1;
 
-vLeverBoltScrewHole_d = 1.2;
+vLeverBoltScrewHole_d = vInsertM2Hole_d;
 vLeverBoltScrewHole_h = vFrontStandartBasePlate_h;
 vLeverBoltScrewHole_offsetX = vLeverBoltHole_offsetX;
 vLeverBoltScrewHole_offsetY = vLeverBoltHole_offsetY;
 vLeverBoltScrewHole_offsetZ = 0;
 
 // lever plate screw holes
-vLeverPlateScrewHole_d = 1.2;
+vLeverPlateScrewHole_d = vInsertM2Hole_d;
 vLeverPlateScrewHole_h = vFrontStandartBasePlate_h;
 vLeverPlateScrewHole_offsetX1 = -(3*vDoveTail_w);
 vLeverPlateScrewHole_offsetX2 = vDoveTail_w;
@@ -70,7 +72,6 @@ vLeverCutoutHoles_h = vLeverCutout_h;
 vLeverCutoutHoles_offsetX = vLeverCutout_offsetX+(vLeverCutoutHoles_d/2);
 vLeverCutoutHoles_offsetY = vLeverCutout_offsetY;
 vLeverCutoutHoles_offsetZ = 0;
-
 
 
 difference(){
@@ -159,3 +160,7 @@ union(){
         cylinder(d=vLeverCutoutHoles_d, h=vLeverCutoutHoles_d );
     
 };
+
+};
+
+slider();

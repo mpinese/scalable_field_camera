@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module body() {
 
 vBellowsFrameUpperLength = vBellowsBackFrameOuter_l+1;
 //vBellowsFrameLowerLength = vBellowsBackFrameInner_l+1;
@@ -65,8 +66,8 @@ vBackPlateCutout_offsetX = -vBackPlateCutout_l/2;
 vBackPlateCutout_offsetY = -vBackPlateCutout_w/2;
 vBackPlateCutout_offsetZ = 0;
 
-vBackPlateScrewHole_d = vScrew1ThreadHole_d;
-vBackPlateScrewHole_h = 10;
+vBackPlateScrewHole_d = vInsertM2Hole_d;
+vBackPlateScrewHole_h = vInsertM2MinDepth_h;
 vBackPlateLockScrewHole_offsetX = vTopEdgeBolt_offsetX;
 vBackPlateLockScrewHole_offsetY = vEdgeBolt_offsetY;
 vBackPlateRailScrewHole_offsetX = -(vBackPlateLength/2)-5;
@@ -89,9 +90,10 @@ vBellowsScrew_offsetY = -(vBodyOuter_w/2);
 vBellowsScrew_offsetZ = vBellowsFrameCutout_offsetZ+vBellowsBackFrameInner_h+vBellowsBackFrameScrewHole_offsetZ;
 
 // hinges
+vHingeTolerance = 0.3;
 vHingeOuter_d = 2*vWall_strength;
 vHingeOuter_h = vHingeBaseWidth-vTolerance;
-vHingeInner_d = vHingeHole+vTolerance;
+vHingeInner_d = vHingeHole+vHingeTolerance;
 vHingeInner_h = vHingeOuter_h;
 vHinge_offsetX = vSideWall_offsetX;
 vHinge_offsetY = (vHingeInnerDistance+vTolerance)/2;
@@ -131,8 +133,8 @@ vStabilizerDovetailToleranceCutout_offsetX = vStabilizerDovetail_offsetX;
 vStabilizerDovetailToleranceCutout_offsetY = vStabilizerDovetail_offsetY;
 vStabilizerDovetailToleranceCutout_offsetZ = vStabilizerDovetail_offsetZ;
 
-vLockingHole_d = 5+vTolerance;
-vLockingHole_h = 8;
+vLockingHole_d = vInsertM5Hole_d;
+vLockingHole_h = vInsertM5MinDepth_h;
 vLockingHole_offsetX = vStabilizerDovetail_offsetX;
 vLockingHole_offsetY = 0;
 vLockingHole_offsetZ = 10;
@@ -303,6 +305,17 @@ difference(){
         rotate([0, 90, 0])
             cylinder(d=vLidLockHole_d, h=vLidLockHole_h);
     
+    // Handle strap and cover mounting holes
+    translate([vStrapHoleDelta+vHandleStrapCoverExtra_l, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
+    translate([vStrapHoleDelta+vHandleStrapCoverExtra_l+vStrapHoleSpacing, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);                
+    translate([-vStrapHoleDelta-vHandleStrapCoverExtra_l, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
+    translate([-vStrapHoleDelta-vHandleStrapCoverExtra_l-vStrapHoleSpacing, vSideWallLeft_offsetY, vSideWall_h/2])
+       rotate([-90, 0, 0]) cylinder(d=vInsertM3Hole_d, h=vSideWall_w);
     };
         
-        
+ };
+ 
+ body();

@@ -5,6 +5,7 @@ include <baseconfig.scad>;
 use <modules.scad>;
 
 
+module front_lid() {
 
 // our outer frame measurements - caution overall
 vFrontLidOuter_l = vBodyOuter_l;
@@ -60,7 +61,7 @@ vRailMidCutout_offsetY = -vRailMidCutout_w/2;
 vRailMidCutout_offsetZ = vFrontLid_wall-vRailMidCutout_h;
 
 // hinges
-vHingeTolerance = vTolerance;
+vHingeTolerance = 0.3;
 vHingeTubeOuter_r = vFrontLid_wall;
 vHingeTubeOuter_h = vFrontLidOuter_w;
 vHingeTubeInner_d = vHingeHole+vHingeTolerance;
@@ -115,14 +116,15 @@ vFocusingBlockCutout_offsetX = -vFrontLidInner_offsetX;
 vFocusingBlockCutout_offsetY = vFrontLidInner_offsetY+vFrontLid_wall;
 vFocusingBlockCutout_offsetZ = vFrontLid_wall;
 
-// Screwholes for the stabilizing lid
-vLidHole_d = vScrew1ThreadHole_d;
-vLidHole_h = vFrontLid_wall;
+// Insert holes for the stabilizing lid
+vLidHole_d = vInsertM3Hole_d;
+vLidHole_h = vInsertM3MinDepth_h;
+assert(vFrontLid_wall >= vInsertM3MinDepth_h);
 
 vLidHoleRow_length = (vLidHoleCount_x-1)*vLidHoleDist_x;
-vLidHoleRow_offsetX = -vLidHoleRow_length/2;
+vLidHoleRow_offsetX = -vLidHoleRow_length/2-17.5;
 vLidHoleRow_offsetY = vLidHoleDist_y/2;
-vLidHoleRow_offsetZ = 0.5; // because of problems with adhesion for the first layer, we place our little screw holes a little bit higher and do the rest with post processing (hot needle)
+vLidHoleRow_offsetZ = 0; // No offset to enable easy insert installation
 
 
 
@@ -192,6 +194,15 @@ difference(){
         rotate([90, 0, 0])
             cylinder(d=vHingeTubeInner_d, h=vHingeTubeOuter_h);
     
+    // Hinge insert holes
+   translate([vHingeTube_offsetX, vHingeTube_offsetY, vHingeTube_offsetZ])
+        rotate([90, 0, 0])
+            cylinder(d=vInsertM5Hole_d, h=vInsertM5MinDepth_h);
+   translate([vHingeTube_offsetX, -vHingeTube_offsetY, vHingeTube_offsetZ])
+        rotate([-90, 0, 0])
+            cylinder(d=vInsertM5Hole_d, h=vInsertM5MinDepth_h);
+    
+    
     // hinge cutouts
     translate([vHingeCutout_offsetX, vHingeCutout_offsetY, vHingeCutout_offsetZ])
         cube([vHingeCutout_l, vHingeCutout_w, vHingeCutout_h]);
@@ -221,17 +232,20 @@ difference(){
     translate([vLensIndent_offsetX, vLensIndent_offsetY, vLensIndent_offsetZ])
         cylinder(d1=vLensIndent_d1, d2=vLensIndent_d2, h=vLensIndent_h);
     
-    // Holes for screwing the stabilizer lid   
+    // Insert holes for screwing the stabilizer lid
+    // Suppress holes for i = 2 as these impinge on the lens indent
     translate([vLidHoleRow_offsetX, vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
     for (i = [0:vLidHoleCount_x-1]){ 
+        if (i != 2) {
         translate([i*vLidHoleDist_x, 0, 0])
-        cylinder(d=vLidHole_d, h=vLidHole_h);
+        cylinder(d=vLidHole_d, h=vLidHole_h); }
     };
     
     translate([vLidHoleRow_offsetX, -vLidHoleRow_offsetY, vLidHoleRow_offsetZ])
     for (i = [0:vLidHoleCount_x-1]){ 
+        if (i != 2) {
         translate([i*vLidHoleDist_x, 0, 0])
-        cylinder(d=vLidHole_d, h=vLidHole_h);
+        cylinder(d=vLidHole_d, h=vLidHole_h); }
     };
     
     // cones for edge bolts from body
@@ -240,6 +254,13 @@ difference(){
     translate([-vEdgeBolt_offsetX, -vEdgeBolt_offsetY, vEdgeBoltCone_offsetZ])
         cylinder(d1=vEdgeBoltCone_d1, d2=vEdgeBoltCone_d2, h=vEdgeBoltCone_h);
     
+    
+    // Receptacle for locking bolt
+    // TODO: This is hard-coded for 4x5 -- see what it would take to make it general
+    translate([-82, 0, 0]) cylinder(d=vInsertM5Size_d, h=vInsertM5Depth_h+0.5);
 };
 
 
+};
+
+front_lid();

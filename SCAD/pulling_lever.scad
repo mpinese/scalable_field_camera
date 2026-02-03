@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module pulling_lever() {
 
 vLeverBasePlate_length = 20;
 vLeverBasePlate_width = 15;
@@ -97,3 +98,9 @@ difference(){
                 cylinder(h=vBoltHole_h, d=vBoltHole_d); 
 
 };
+
+};
+
+pulling_lever();
+
+translate([0, 100, 0]) scale([1, -1, 1]) pulling_lever();

@@ -4,6 +4,7 @@ include <baseconfig.scad>;
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module focusing_block() {
 
 // focusing rod axis is set to -63mm to the lid center
 // rail block total width is 100mm
@@ -89,6 +90,7 @@ vScrewHole3_offsetZ = 0;
             cube([vFocusingBlock_l, vFocusingBlock_w, vFocusingBlock_h]);
          translate([vFrontWallExtension_offsetX, vFrontWallExtension_offsetY, vFrontWallExtension_offsetZ])
             cube([vFrontWallExtension_l, vFrontWallExtension_w, vFrontWallExtension_h]);
+            
          }
      // front edge cutout
      translate([vFrontEdgeCutout_offsetX, vFrontEdgeCutout_offsetY, vFrontEdgeCutout_offsetZ])
@@ -111,11 +113,16 @@ vScrewHole3_offsetZ = 0;
             wedge(vLeftUpperEdgeCutout_l, -vLeftUpperEdgeCutout_w, -vLeftUpperEdgeCutout_h);
      translate([vRightUpperEdgeCutout_offsetX, vRightUpperEdgeCutout_offsetY, vRightUpperEdgeCutout_offsetZ])
             wedge(vRightUpperEdgeCutout_l, vRightUpperEdgeCutout_w, -vRightUpperEdgeCutout_h);
+
      // screw holes
      translate([vScrewHole1_offsetX, vScrewHole1_offsetY, vScrewHole1_offsetZ])
-        cylinder(d=vScrewHole_d, h=vScrewHole_h);
+        cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h+1);
     /*translate([vScrewHole2_offsetX, vScrewHole2_offsetY, vScrewHole2_offsetZ])
         cylinder(d=vScrewHole_d, h=vScrewHole_h);*/
     translate([vScrewHole3_offsetX, vScrewHole3_offsetY, vScrewHole3_offsetZ])
-        cylinder(d=vScrewHole_d, h=vScrewHole_h);
+        cylinder(d=vInsertM3Hole_d, h=vInsertM3MinDepth_h+1);
  }
+ 
+ };
+ 
+ focusing_block();

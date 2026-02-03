@@ -1,9 +1,8 @@
-// some variables
-$fn = 60; // we are using 60 fragments for cylinders and similar objects
 
 // some modules such as hex, countersunk screws, roof, wedge are available in a module file
 use <modules.scad>;
 
+module lensboard_lower_clamp() {
 
 // variables
 
@@ -21,7 +20,7 @@ vClampCutout_offsetX = 10;
 vClampCutout_offsetY = -vClampCutout_w/2;
 vClampCutout_offsetZ = 0;
 
-vScrewHole_d = 3;
+vScrewHole_d = 3.5;
 vScrewHole_h = vClampBase_h;
 vScrewHole_offsetX = 5;
 vScrewHole_offsetY = 25;
@@ -78,3 +77,7 @@ difference(){
             wedge(vEdgeCut_h, vEdgeCut, vEdgeCut);        
     
 }
+
+};
+
+lensboard_lower_clamp();
