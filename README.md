@@ -60,11 +60,17 @@ The handle will need to be printed in a flexible material like TPU.
 ## Printing and Assembly
 - Print with 0.2 mm layer height and 15% infill throughout.
 - Parts are in print orientation in the STLs.
+- Support is required for the following parts:
+  - `front_standard_tilt_plate_structural`
+  - `rails_structural`
+  - `lensboard_carrier_structural`
+  - `front_standard_structural`
 - Parts are labelled as "structural", "general", "control", and "flexible".
   - Structural parts should be printed in a stiff material like PPA-CF, with at least 4 walls side, top, and bottom. If using ABS or PLA, increase to at least 5 walls side, top, and bottom.
   - General and control parts can be printed in any material, with 3 walls.
   - Flexible parts should be printed in TPU with 100% infill.
 - Construct following assembly.scad (open in OpenSCAD nightly version, and the full assembly with all parts will be browsable). Also consult [Edgar Kech's Scalable Field Camera](https://github.com/edgarkech/scalable_field_camera) repo for further instructions and photos.
+- Note that the bellows frames each have a very thin membrane of filament that connects the inner and outer frames. This needs to be cut out to separate the two pieces of each, before the bellows can be inserted.
 
 
 ## Licence

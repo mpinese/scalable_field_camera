@@ -60,4 +60,6 @@ translate([vLockingLeverRadius_offsetX, vLockingLeverRadius_offsetY, vLockingLev
 
 };
 
-locking_lever();
+rotate([180, 0, 0]) locking_lever();
+
+rotate([180, 0, 0]) translate([0, -20, 0]) scale([1, -1, 1]) locking_lever();
