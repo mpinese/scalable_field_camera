@@ -58,7 +58,8 @@ The handle will need to be printed in a flexible material like TPU.
 
 
 ## Printing and Assembly
-- Print with 0.2 mm layer height throughout and 15% infill.
+- Print with 0.2 mm layer height and 15% infill throughout.
+- Parts are in print orientation in the STLs.
 - Parts are labelled as "structural", "general", "control", and "flexible".
   - Structural parts should be printed in a stiff material like PPA-CF, with at least 4 walls side, top, and bottom. If using ABS or PLA, increase to at least 5 walls side, top, and bottom.
   - General and control parts can be printed in any material, with 3 walls.
