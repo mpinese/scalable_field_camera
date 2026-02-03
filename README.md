@@ -1,66 +1,75 @@
-# Scalable large format field camera - 4&times;5 - 5&times;7 - 8&times;10
+# An Opinionated Remix of Edgar Kech's _Scalable large format field camera_
 
-_This is my attempt to create a scalable large format field camera design._
+Edgar Kech has gifted the community an outstanding design in his [Scalable Field Camera](https://github.com/edgarkech/scalable_field_camera).
 
-## Project goals:
-- of course a 3d printable and usable large format field camera in 4x5" format. The design should be scalable to 5x7" or even 8x10" by just changing a handful of variables.
-- Learning OpenSCAD. Learning to use it efficiently. Learning to do good parametric development/design.
-- Learning git/github and sharing my code with other people
-- Checking out the limits of home 3D printing with a very limited set of available tools
+This is my personal remix of Edgar's work, with quality-of-life tweaks, more robust mechanical fixtures, and bugfixes. If printed in the recommended filament this camera is exceptionally lightweight, being 965 g (2.1 lb) including bellows and ground glass. I've used it in multiple photo trips now with no issues.
 
-## Some technical goals:
-- the design is inspired by old and established field cameras like Horseman 45HD/FA or Linhof Technika. But it is also inspired by Intrepid and Standard Camera
-- compact and lightweight. Projected weight for the 4x5 version with ground glass but without lens is below 1500g. The "overall package" should be lightweight, so don't expect me to design a rail and front standard for holding big and heavy lenses. for 4x5": usable with lenses from 90-300mm. Shorter or longer lenses are not targeted.
-- a small standard lens should be able to stay on the camera when it is closed (e.g. Fujinon-WS 150/6.3 or Symmar 135/5.6, ...)
-- rise of about 25-30mm with a normal lens
-- fall of about 10mm with a normal lens
-- front/back tilt of about 10 degrees
-- left/right swing of about 10 degrees
-- left/right shift optionally (probably not with first release)
-- all movements on the front standard, no movements on the back
-- easy switchable from landscape to portrait format
-- tripod mount with Arca Swiss type mount
-- all parts must be either 3D-printable or easily available.
-- no special tools required besides a decent 3D printer and some common tools like little files, screwdrivers, sanding paper, cutter, scissors, ...
-- no exotic third party parts/components
-- form follows function
-- KISS
+My remix is focused on 4&times;5 cameras only and will need tweaking for larger formats. If you're looking to print a larger camera, consider Edgar's original design.
 
-## Early design decisions:
-- completely 3D printed rail and front standard mechanism - lots of dovetails :-)
-- for the initial 4x5 version I will use a bellows from standard cameras (https://www.standardcameras.com/product/replacement-bellows-v1-0/). For now it's relatively easy available, cheap and already mounted into a frame. For later versions, I will probably switch over to another source and add my own bellows mounting frame. For working with alternative bellows see the hints in the README file in folder STL_4x5, since you will have to build customized bellows frames using SCAD files.
-- for the 5x7 version I will use a bellows from ebay-shop "ecbuyonline2008" which is orginally for a Linhof Technika 5x7 IV or V
-- for the focusing rod I will use 6mm rods with 2mm pitch
-- due to some printing related problems (first layer), I will avoid printing small holes directly onto the printing bed (smaller than 5mm). If holes are required, they will have a little offset on the Z-axis of 0.5mm. This will allow a "clean" first layer with really good adhesion, while the holes are "pre-drilled" for most of their depth
+## Changes from the original design:
+- Exceptionally lightweight: 965g with bellows and ground glass.
+- Threaded heat-set inserts used throughout; no more screwing into plastic.
+- 3D printed knobs and lensboard, to remove reliance on hard-to-source parts.
+- A more streamlined hinge.
+- (Work in progress!) Harmonising the fasteners used, in an attempt to simplify the Bill of Materials.
+- Many minor bugfixes
+- Reorganised the source to better report the components used.
+- A handle!
 
-## First findings after finishing the first functional prototype
-- PETG printing is somehow okay, but PLA is more rigid. Although I will do further tests with PETG, PLA stays the preferred material. This applies especially to the dovetails.
-- completely printed front standard with (more than) acceptable stability is possible
-- overall design seems to be a good starting point for further optimizations
+## Bill of Materials:
+- 3D printer filament, see below for notes on filament choice. < 1 kg of filament will be needed in all cases. A small amount of TPU will be needed for the handle.
+- Bellows. I followed the [Standard Camera bellows guide](https://standardcameras.com/pages/how-to-make-a-bellows) and it worked well. Note however that it's critical that the bellows material be as thin as possible; if it's too thick, the camera will not be able to close. I had success with ripstop nylon for the outer, and a very thin synthetic material used to blackout windows (black on one side, silver on the other) -- together these two were only 0.14 mm thick.
+- Ground glass, 127 x 101 mm
+- 600mm of 1.25mm spring steel wire
+- 100mm of 0.75mm spring steel wire
+- 1x brass T6 leadscrew nut (as are common on 3D printers). Ideally a double-trimmed flange type or else you will need to cut off two sides of the circular flange in order for it to fit.
+- 1x T6 leadscrew, length 150 mm. Ensure that the leadscrew and nut are compatible (ie same lead and pitch).
+- 3x plain washer, 6 mm, 0.8 mm thick
+- 1x spring washer, 6 mm
+- 1x carbon fibre rod, solid, 4 mm OD, >= 160 mm long
+- 2x grub screw, M5 x 5 mm
+- 4x button head machine screw, M3 x 8 mm
+- 12x button head machine screw, M2 x 8 mm
+- 4x countersunk machine screw, M3 x 6 mm
+- 4x countersunk machine screw, M3 x 8 mm
+- 23x countersunk machine screw, M3 x 10 mm
+- 2x countersunk machine screw, M5 x 16 mm
+- 4x countersunk machine screw, M5 x 20 mm
+- 8x grub screw, M3 x 5 mm
+- 10x grub screw, M3 x 8 mm
+- 1x hex nut, M5
+- 12x heat set insert, M2 x 3.5 x 3 (3.5 mm OD, 3 mm depth)
+- 56x heat set insert, M3 x 5 x 4 (5 mm OD, 4 mm depth) -- sometimes called the "Voron" size
+- 8x heat set insert, M5 x 7 x 5 (7 mm OD, 5 mm depth)
 
-## to do / next steps
-- more real world testing (first tests successful)
-- work around the current -7/+7 degrees tilt restriction (low priority)
-- mechanism to lock the front lid when folding (done)
-- foldable hood for the ground glass
-- OpenSCAD code clean up and refinement (done)
-- releasing the OpenSCAD code and make this project real open source  (done)
-- scaling up to 5x7" (done)
-- re-evaluate 4x5" bellows options (different source, design for configurable bellows frames is done) 
-- using the built-in github wiki for documentation
-
-# Update 2020-05-23
-The 5x7 version is also finished. Although the 5x7" version is technically identical to the 4x5", there have been some changes to all SCAD files and I didn't test all of them again with 4x5. 
-So if you are brave enough to work with the SCAD files to generate your own (4x5") STLs, please check them against my original 4x5 STLs.
-
-# Update 2022-10-17
-In the past there were some rumours or jokes about creating the 8x10" version, but nobody seemed to be brave enough to start the upscaling project. Or maybe the initially brave people gave up in despair... 
-Until today. I had a conversation with Miguel Mesa (https://www.facebook.com/miguemesa), who now wants to start scaling up the design to 8x10" - which would be another milestone for my design. 
-Although I am still pausing most of my photographic and 3d printing related activities, I am really curious how my design may evolve. And I want to encourage all watchers interested in a 8x10" version to participate and maybe even contribute to this next milestone.   
-
-**Some very kind people asked me about the possibility to show their appreciation by donating to me.**
-
-If you really felt somehow obliged to do so, then you should use https://paypal.me/EdgarKech :-) .
-But I am also happy if you post pictures of your build to https://www.facebook.com/groups/3dprinting.and.analog.photography/
+All parts are easily sourced from AliExpress.
 
 
+## Filament
+I used and recommend Siraya Tech's PPA-CF for this build: it is lightweight, strong, and stiff. However, it is also expensive and requires a printer with a heated chamber.
+
+ABS is a cheaper option than PPA-CF, though it also requires a heated chamber printer, and it will likely require thicker walls than PPA-CF, thus increasing weight.
+
+If you do not have access to a heated chamber printer then the next best option would be PLA, ideally filled (eg PLA-CF) for best printability. However, bear in mind that a PLA body will be both heavier, and less heat resistant, than the PPA-CF. This is probably not an issue in normal use, but if you were to leave your PLA camera in a hot car, it may warp.
+
+I do not recommend PETG.
+
+The handle will need to be printed in a flexible material like TPU.
+
+
+## Printing and Assembly
+- Print with 0.2 mm layer height throughout and 15% infill.
+- Parts are labelled as "structural", "general", "control", and "flexible".
+  - Structural parts should be printed in a stiff material like PPA-CF, with at least 4 walls side, top, and bottom. If using ABS or PLA, increase to at least 5 walls side, top, and bottom.
+  - General and control parts can be printed in any material, with 3 walls.
+  - Flexible parts should be printed in TPU with 100% infill.
+- Construct following assembly.scad (open in OpenSCAD nightly version, and the full assembly with all parts will be browsable). Also consult [Edgar Kech's Scalable Field Camera](https://github.com/edgarkech/scalable_field_camera) repo for further instructions and photos.
+
+
+## Licence
+CC-BY-NC-SA 4.0, see CC-BY-NC-SA-LICENSE.
+
+
+## Attribution
+- Original design by Edgar Kech, https://github.com/edgarkech/scalable_field_camera.
+- Modifications by Mark Pinese
